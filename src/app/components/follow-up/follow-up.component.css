@@ -1,0 +1,28 @@
+.mainContainer {
+    padding: 20px;
+}
+
+.jobAppContainer {
+    background-color: lightyellow;
+    border: 2px solid orange;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.whereApplied{
+    text-align: right;
+}
+
+.infoBtn{
+    background-color : lightblue;
+}
+.editBtn{
+    background-color: blue;
+}
+.removeBtn{
+    background-color: orange;
+}
+.uploadBtn {
+    background-color: lightseagreen;
+}

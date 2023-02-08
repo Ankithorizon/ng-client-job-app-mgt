@@ -1,0 +1,56 @@
+<div class="mainContainer">
+    <!-- filter job-apps-->
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            filter job apps!
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <hr />
+
+    <!-- display all job-apps-->
+    <div *ngIf="jobApps?.length>0" class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div *ngFor="let job of jobApps; let i = index">
+                <div class="row jobAppContainer">
+                    <div class="col-sm-6">
+                        <button type="button" 
+                            (click)="viewJobApp()" 
+                            class="btn infoBtn">
+                            <i class="bi bi-binoculars"></i>
+                        </button>&nbsp;&nbsp;
+                        <button type="button" 
+                            (click)="viewJobApp()" 
+                            class="btn editBtn">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>&nbsp;&nbsp;
+                        <button type="button" (click)="viewJobApp()" 
+                            class="btn removeBtn">
+                            <i class="bi bi-calendar-x"></i>
+                        </button>&nbsp;&nbsp;
+                        <button type="button" (click)="viewJobApp()" 
+                            class="btn uploadBtn">
+                            <i class="bi bi-cloud-arrow-up"></i> Resume
+                        </button>&nbsp;&nbsp;
+                        <button type="button" (click)="viewJobApp()" 
+                            class="btn btn-outline-secondary">
+                            <i class="bi bi-clock-history"></i> App-Status
+                        </button>
+                    </div>
+                    <div class="col-sm-6 whereApplied">
+                        <span 
+                            [ngStyle]="{'color': localDataService.getAppStatusTypeColor(job.appStatus)}"
+                            *ngIf="appStatusTypes?.length>0">
+                            [{{appStatusTypes[job.appStatus]}}]
+                        </span>
+                        {{job.appliedOn | date : "MMM-dd, y"}} @ {{job.city}}, {{job.province}}
+                    </div>                   
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
