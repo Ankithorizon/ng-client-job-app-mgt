@@ -21,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FollowUpComponent } from './components/follow-up/follow-up.component';
 import { ViewJobAppComponent } from './components/follow-up/view-job-app/view-job-app.component';
+import { EditJobAppComponent } from './components/follow-up/edit-job-app/edit-job-app.component';
 
 
 // services
@@ -31,7 +32,8 @@ import { ViewJobAppComponent } from './components/follow-up/view-job-app/view-jo
     HomeComponent,
     HeaderComponent,
     FollowUpComponent,
-    ViewJobAppComponent
+    ViewJobAppComponent,
+    EditJobAppComponent
   ],
   imports: [
     BrowserModule,

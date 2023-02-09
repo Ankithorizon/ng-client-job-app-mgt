@@ -60,6 +60,11 @@ export class FollowUpComponent implements OnInit {
     this.router.navigate(['/view-job'], { state: { selectedJob: { selectedJob } } });
   }
 
+  editJobApp(selectedJob) {
+    this.router.navigate(['/edit-job'], { state: { selectedJob: { selectedJob } } });
+  }
+  
+  // follow-up-notes
   openPanel(jobId) {
     this.displayPanelJobId = jobId;
   }
