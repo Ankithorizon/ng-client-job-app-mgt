@@ -20,7 +20,7 @@
                 <div class="col-sm-6 jobAppDetails">
                     Follow-Up-Notes : {{jobAppData.followUpNotes}}
                 </div>
-                <div class="col-sm-6 jobAppDetails">
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
                     Company Name :
                     <span *ngIf="jobAppData.companyName">
                         {{jobAppData.companyName}}
@@ -29,7 +29,7 @@
                         N/A
                     </span>
                 </div>
-                <div class="col-sm-6 jobAppDetails">
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
                     Agency :
                     <span *ngIf="jobAppData.agencyName">
                         {{jobAppData.agencyName}}
@@ -47,13 +47,29 @@
                         N/A
                     </span>
                 </div>
-                <div class="col-sm-6 jobAppDetails">
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Contact Person Name : {{jobAppData.contactPersonName}}
                 </div>
                 <div class="col-sm-6 jobAppDetails">
+                    Phone :
+                    <span *ngIf="jobAppData.phoneNumber">
+                        {{jobAppData.phoneNumber}}
+                    </span>
+                    <span *ngIf="!jobAppData.phoneNumber">
+                        N/A
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Contact Email : {{jobAppData.contactEmail}}
                 </div>
                 <div class="col-sm-6 jobAppDetails">
+                    City : {{jobAppData.city}}
                 </div>
                 <div class="col-sm-6 jobAppDetails">
+                    Province : {{jobAppData.province}}
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Applied : {{jobAppData.appliedOn | date : "MMM-dd, y"}}
                 </div>
             </div>
         </div>

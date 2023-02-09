@@ -3,6 +3,10 @@
 }
 .jobAppDetails {
     padding: 5px;
+    font-size: large;
+}
+.jobAppDetailsSpecial{
+    font-weight: bold;
 }
 .jobAppContainer {
     background-color: lightyellow;
