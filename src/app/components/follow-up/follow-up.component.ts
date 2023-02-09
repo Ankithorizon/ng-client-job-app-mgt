@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalDataService } from '../../services/local-data.service';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -19,16 +17,18 @@ export class FollowUpComponent implements OnInit {
   jobApps: Array<any>;
   appStatusTypes: Array<any>;
 
+  // follow-up-notes-panel
+  displayPanelJobId;
+
   constructor(
     private toastService: ToastService,
-    private modalService: NgbModal,
     public localDataService: LocalDataService,
     public dataService: DataService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.getAppStatusTypes();
-    this.getAllJobApps();  
+    this.getAllJobApps();
   }
 
   getAppStatusTypes() {
@@ -37,26 +37,31 @@ export class FollowUpComponent implements OnInit {
         data => {
           console.log(data);
           this.appStatusTypes = data;
-
+          this.localDataService.setAppStatusTypes(this.appStatusTypes);
         },
         error => {
           console.log(error);
         }
-    );
+      );
   }
   getAllJobApps() {
     this.dataService.getAllJobApps()
       .subscribe(
-        data => {          
+        data => {
           console.log(data);
           this.jobApps = data;
         },
         error => {
-          console.log(error);      
-    });
+          console.log(error);
+        });
   }
 
-  viewJobApp() {
-    console.log('view job app!');
+  viewJobApp(selectedJob) {
+    this.router.navigate(['/view-job'], { state: { selectedJob: { selectedJob } } });
   }
+
+  openPanel(jobId) {
+    this.displayPanelJobId = jobId;
+  }
+ 
 }

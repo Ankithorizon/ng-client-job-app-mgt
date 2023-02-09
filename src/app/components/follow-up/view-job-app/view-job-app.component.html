@@ -1,0 +1,63 @@
+<div *ngIf="jobAppData">
+    <div class="row mainContainer">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8 jobAppContainer">
+            <div class="row jobAppHeader">
+                <div class="col-sm-12">
+                    <span>
+                        Job-Application Details ## {{jobAppData.jobApplicationId}}
+                    </span>
+                    <br />
+                    <span 
+                        [ngStyle]="{'color': localDataService.getAppStatusTypeColor(jobAppData.appStatus)}"
+                        *ngIf="localDataService.getAppStatusTypes()?.length>0">
+                        [{{localDataService.getAppStatusTypes()[jobAppData.appStatus]}}]
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 jobAppDetails">
+                    Follow-Up-Notes : {{jobAppData.followUpNotes}}
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Company Name :
+                    <span *ngIf="jobAppData.companyName">
+                        {{jobAppData.companyName}}
+                    </span>
+                    <span *ngIf="!jobAppData.companyName">
+                        N/A
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Agency :
+                    <span *ngIf="jobAppData.agencyName">
+                        {{jobAppData.agencyName}}
+                    </span>
+                    <span *ngIf="!jobAppData.agencyName">
+                        N/A
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Company URL :
+                    <span *ngIf="jobAppData.webURL">
+                        {{jobAppData.webURL}}
+                    </span>
+                    <span *ngIf="!jobAppData.webURL">
+                        N/A
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">        
+        </div>
+    </div>
+</div>

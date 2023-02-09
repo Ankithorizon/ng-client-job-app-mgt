@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { FollowUpComponent } from './components/follow-up/follow-up.component';
+import { ViewJobAppComponent } from './components/follow-up/view-job-app/view-job-app.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'follow-up', component: FollowUpComponent },
+  { path: 'view-job', component: ViewJobAppComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 

@@ -1,4 +1,5 @@
 <div class="mainContainer">
+
     <!-- filter job-apps-->
     <div class="row">
         <div class="col-sm-1"></div>
@@ -14,28 +15,28 @@
     <div *ngIf="jobApps?.length>0" class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
-            <div *ngFor="let job of jobApps; let i = index">
-                <div class="row jobAppContainer">
+            <div class="jobAppContainer" *ngFor="let job of jobApps; let i = index">
+                <div class="row">
                     <div class="col-sm-6">
                         <button type="button" 
-                            (click)="viewJobApp()" 
+                            (click)="viewJobApp(job)" 
                             class="btn infoBtn">
                             <i class="bi bi-binoculars"></i>
                         </button>&nbsp;&nbsp;
                         <button type="button" 
-                            (click)="viewJobApp()" 
+                             
                             class="btn editBtn">
                             <i class="bi bi-pencil-fill"></i>
                         </button>&nbsp;&nbsp;
-                        <button type="button" (click)="viewJobApp()" 
+                        <button type="button"  
                             class="btn removeBtn">
                             <i class="bi bi-calendar-x"></i>
                         </button>&nbsp;&nbsp;
-                        <button type="button" (click)="viewJobApp()" 
+                        <button type="button" 
                             class="btn uploadBtn">
                             <i class="bi bi-cloud-arrow-up"></i> Resume
                         </button>&nbsp;&nbsp;
-                        <button type="button" (click)="viewJobApp()" 
+                        <button type="button" 
                             class="btn btn-outline-secondary">
                             <i class="bi bi-clock-history"></i> App-Status
                         </button>
@@ -46,8 +47,100 @@
                             *ngIf="appStatusTypes?.length>0">
                             [{{appStatusTypes[job.appStatus]}}]
                         </span>
-                        {{job.appliedOn | date : "MMM-dd, y"}} @ {{job.city}}, {{job.province}}
+                        <span 
+                            [ngStyle]="{'color': localDataService.getAppStatusTypeColor(job.appStatus)}"
+                            *ngIf="appStatusTypes?.length>0">
+                            {{job.appliedOn | date : "MMM-dd, y"}} @ {{job.city}}, {{job.province}}
+                        </span>                        
                     </div>                   
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="jobAppDetails">
+                            Contact Name : {{job.contactPersonName}}
+                        </div>                        
+                        <div class="jobAppDetails">
+                            Contact Email : {{job.contactEmail}}
+                        </div>
+                        <div class="jobAppDetails">
+                            Phone : 
+                            <span *ngIf="job.phoneNumber">
+                                {{job.phoneNumber}}
+                            </span>
+                            <span *ngIf="!job.phoneNumber">
+                                N/A
+                            </span>
+                        </div>
+                        <div>
+                            <button type="button" 
+                                
+                                class="btn downloadBtn">
+                                <i class="bi bi-cloud-arrow-down"></i>
+                                Resume
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="jobAppDetails">
+                            Company :
+                            <span *ngIf="job.companyName">
+                                {{job.companyName}}
+                            </span>
+                            <span *ngIf="!job.companyName">
+                                N/A
+                            </span>
+                        </div>
+                        <div class="jobAppDetails">
+                            Agency :
+                            <span *ngIf="job.agencyName">
+                                {{job.agencyName}}
+                            </span>
+                            <span *ngIf="!job.agencyName">
+                                N/A
+                            </span>
+                        </div>
+                        <div class="jobAppDetails">
+                            Company URL :
+                            <span *ngIf="job.webURL">
+                                {{job.webURL}}
+                            </span>
+                            <span *ngIf="!job.webURL">
+                                N/A
+                            </span>
+                        </div>
+                        <div class="jobAppDetails">
+                            <div class="accordion" 
+                                id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" 
+                                        id="headingOne">
+                                        <button class="accordion-button collapsed" 
+                                            (click)="openPanel(job.jobApplicationId)"
+                                            type="button" 
+                                            data-bs-toggle="collapse" 
+                                            data-bs-target="#collapseOne"
+                                            aria-expanded="true" 
+                                            aria-controls="collapseOne">
+                                            <span>
+                                                Follow-UP-Notes
+                                            </span>
+                                        </button>
+                                    </h2>
+                                    <div
+                                        *ngIf="displayPanelJobId==job.jobApplicationId"
+                                        id="collapseOne"
+                                        class="accordion-collapse collapse" 
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{job.followUpNotes}}
+                                        </div>
+                                    </div>
+                                </div>                             
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

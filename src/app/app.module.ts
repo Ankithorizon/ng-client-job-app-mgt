@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FollowUpComponent } from './components/follow-up/follow-up.component';
+import { ViewJobAppComponent } from './components/follow-up/view-job-app/view-job-app.component';
 
 
 // services
@@ -29,7 +30,8 @@ import { FollowUpComponent } from './components/follow-up/follow-up.component';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FollowUpComponent
+    FollowUpComponent,
+    ViewJobAppComponent
   ],
   imports: [
     BrowserModule,

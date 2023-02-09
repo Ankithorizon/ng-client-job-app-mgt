@@ -7,6 +7,15 @@ export class LocalDataService {
 
   constructor() { }
 
+  private AppStatusTypes;
+  setAppStatusTypes(val) {
+    this.AppStatusTypes = val;
+  }
+  getAppStatusTypes() {
+    return this.AppStatusTypes;
+  }
+
+
   // return color as per appStatusType
   getAppStatusTypeColor(appStatusType) {
     if (appStatusType === 0)

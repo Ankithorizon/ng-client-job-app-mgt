@@ -12,6 +12,7 @@
 
 .whereApplied{
     text-align: right;
+    font-weight: bold;
 }
 
 .infoBtn{
@@ -25,4 +26,10 @@
 }
 .uploadBtn {
     background-color: lightseagreen;
+}
+.jobAppDetails { 
+    padding:5px;
+}
+.downloadBtn {
+    background-color: lightgreen;
 }
