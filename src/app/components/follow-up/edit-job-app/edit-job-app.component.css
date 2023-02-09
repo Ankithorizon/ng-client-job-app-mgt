@@ -1,3 +1,6 @@
+.mainContainer {
+    padding: 20px;
+}
 .componentHeader {
     background-color: lightyellow;
 }
@@ -31,4 +34,8 @@
     text-align: center;
     font-size: x-large;
     font-weight: bold;
+}
+
+.formField{
+    padding-bottom: 10px
 }

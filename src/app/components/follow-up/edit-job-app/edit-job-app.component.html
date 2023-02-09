@@ -1,70 +1,206 @@
 
-<div class="container">
-    <div class="col-md-12 mx-auto">
-        <div class="card">
-            <div class="card-header componentHeader">
-                <h4>
-                    <div>
-                        [Job-Application - Edit] &nbsp;&nbsp; # {{selectedJob.jobApplicationId}}
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header componentHeader">
+                        <h4>
+                            <div>
+                                [Job-Application - Edit] &nbsp;&nbsp; # {{selectedJob.jobApplicationId}}
+                            </div>
+                        </h4>
+                        <div *ngIf="apiError" class="apiError">
+                            {{apiMessage}}
+                        </div>
+                        <div *ngIf="!apiError" class="apiSuccess">
+                            {{apiMessage}}
+                        </div>
+                        <div *ngIf="modelErrors?.length>0" class="apiError">
+                            <div *ngFor="let me of modelErrors">
+                                <span>* {{me}}</span>
+                                <br />
+                            </div>
+                        </div>
                     </div>
-                </h4>
-                <div *ngIf="apiError" class="apiError">
-                    {{apiMessage}}
-                </div>
-                <div *ngIf="!apiError" class="apiSuccess">
-                    {{apiMessage}}
-                </div>
-                <div *ngIf="modelErrors?.length>0" class="apiError">
-                    <div *ngFor="let me of modelErrors">
-                        <span>* {{me}}</span>
-                        <br />
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <form *ngIf="jobAppEditForm" 
-                    class="form-jobAppEdit" 
-                    [formGroup]="jobAppEditForm" (ngSubmit)="onSubmit()">
-
-                    <div class="row">
-                        <div class="col-md-3 mx-auto"></div>
-                        <div class="col-md-6 mx-auto">
+                    <div class="card-body">
+                        <form *ngIf="jobAppEditForm" 
+                            class="form-jobAppEdit" 
+                            [formGroup]="jobAppEditForm" 
+                            (ngSubmit)="onSubmit()">
+                
+                            <div class="row">
+                                <div class="col-md-1 mx-auto"></div>
+                                <div class="col-md-10 mx-auto">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Application Status</label>
+                                                <select class="form-control" formControlName="appStatus">
+                                                    <option value={{x.value}} *ngFor="let x of appStatusTypes">
+                                                        {{x.text}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f['appStatus'].errors" class="invalid-feedback">
+                                                    <div *ngIf="f['appStatus'].errors['required']">
+                                                        App-Status is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Contact Person</label>
+                                                <input type="text" 
+                                                    formControlName="contactPersonName" 
+                                                    class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['contactPersonName'].errors }" />
+                                                <div *ngIf="submitted && f['contactPersonName'].errors" 
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f['contactPersonName'].errors['required']">
+                                                        Contact Person is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Contact Email</label>
+                                                <input type="text" formControlName="contactEmail" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['contactEmail'].errors }" />
+                                                <div *ngIf="submitted && f['contactEmail'].errors" class="invalid-feedback">
+                                                    <div *ngIf="f['contactEmail'].errors['required']">
+                                                        Contact Email is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Company Name</label>
+                                                <input type="text" 
+                                                    formControlName="companyName" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }" />                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Agency Name</label>
+                                                <input type="text" formControlName="agencyName" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['agencyName'].errors }" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Web URL</label>
+                                                <input type="text" formControlName="webURL" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['webURL'].errors }" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Phone Number</label>
+                                                <input type="text" formControlName="phoneNumber" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }" />                                            
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Province</label>
+                                                <select class="form-control" 
+                                                    formControlName="province">
+                                                    <option value={{x}} *ngFor="let x of provinces">
+                                                        {{x}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f['province'].errors" 
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f['province'].errors['required']">
+                                                        Province is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>City</label>
+                                                <select class="form-control" 
+                                                    formControlName="city">
+                                                    <option value={{x}} *ngFor="let x of cities">
+                                                        {{x}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f['city'].errors" 
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f['city'].errors['required']">
+                                                        City is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Follow-Up-Notes</label>
+                                                <textarea 
+                                                    formControlName="followUpNotes"
+                                                    cols="32" 
+                                                    rows="5" 
+                                                    class="text-area">
+                                                </textarea>                                             
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group formField">
+                                                <label>Province</label>
+                                                <input class="form-control" 
+                                                    placeholder="yyyy-mm-dd" 
+                                                    name="dp" 
+                                                    formControlName="appliedOn" 
+                                                    ngbDatepicker
+                                                    #d="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" 
+                                                    (click)="d.toggle()" type="button">
+                                                    <i class="bi bi-house"></i>
+                                                </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 mx-auto"></div>
+                            </div>
+                            <hr />
                             <div class="form-group">
-                                <label>App Status</label>
-                                <select class="form-control" 
-                                    formControlName="appStatus">
-                                    <option value={{x.value}} *ngFor="let x of appStatusTypes">
-                                        {{x.text}}
-                                    </option>
-                                </select>
-                                <div *ngIf="submitted && f['appStatus'].errors" 
-                                    class="invalid-feedback">
-                                    <div *ngIf="f['appStatus'].errors['required']">
-                                        App-Status is required
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-success">
+                                            Edit Job-Application
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-primary cancelBtn">
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 mx-auto"></div>
+                        </form>
                     </div>
-                    <hr />
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button type="submit" 
-                                    class="btn btn-success">
-                                    Edit Job-Application
-                                </button>
-                            </div>
-                            <div class="col-sm-6">
-                                <button type="button" class="btn btn-primary cancelBtn">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
         </div>
-    </div>
+        <div class="col-sm-2"></div>
+    </div> 
 </div>

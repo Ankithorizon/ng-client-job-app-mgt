@@ -25,7 +25,7 @@ export class EditJobAppComponent implements OnInit {
     phoneNumber: '',
     city: '',
     province: '',
-    appliedOn: null,
+    appliedOn: Date,
     appStatus: 0,
     followUpNotes: ''
   };
@@ -33,6 +33,11 @@ export class EditJobAppComponent implements OnInit {
   appStatusTypes = [];
   applicationStatusCollection = [];
 
+  cities = [];
+  provinces = [];
+
+  model: any;
+  
   // form
   jobAppEditForm: FormGroup;
   submitted = false;
@@ -57,6 +62,9 @@ export class EditJobAppComponent implements OnInit {
     else {
       this.selectedJob = this.myState.selectedJob.selectedJob;
       
+      this.provinces = this.localDataService.getProvinces();
+      this.cities = this.localDataService.getCities(this.selectedJob.province);
+
       this.applicationStatusCollection = this.localDataService.getAppStatusTypes();
       this.applicationStatusCollection.forEach(element => {
         this.appStatusTypes.push({
