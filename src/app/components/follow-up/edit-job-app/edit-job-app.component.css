@@ -37,5 +37,15 @@
 }
 
 .formField{
-    padding-bottom: 10px
+    padding-bottom: 10px    
+}
+
+.appStatusField{
+    font-size: larger;
+    font-weight: bold;    
+}
+
+.invalidDate{
+    color: red;
+    font-weight: bold;
 }

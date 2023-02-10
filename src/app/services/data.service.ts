@@ -27,4 +27,8 @@ export class DataService {
   viewJobApp(jobAppId): Observable<any> {
     return this.http.get<any>(this.JobApplication_API + '/viewJobApp/'+jobAppId);
   }
+  // edit jobApplication
+  editJobApp(jobAppData): Observable<any> {
+    return this.http.post(this.JobApplication_API + '/editJobApp', jobAppData)
+  }
 }

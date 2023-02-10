@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalDataService } from '../../../services/local-data.service';
 import { Location } from '@angular/common';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import JobApplication from '../../../models/jobApplication';
 
 @Component({
   selector: 'app-edit-job-app',
@@ -13,6 +15,11 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./edit-job-app.component.css']
 })
 export class EditJobAppComponent implements OnInit {
+
+  // validation
+  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  phoneRegx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
 
   myState;
   selectedJob = {
@@ -35,17 +42,25 @@ export class EditJobAppComponent implements OnInit {
 
   cities = [];
   provinces = [];
-
-  model: any;
   
   // form
   jobAppEditForm: FormGroup;
   submitted = false;
-  apiMessage = '';
-  apiError = false;
-  modelErrors = [];
+  apiResponse = '';
+  responseColor = '';
+  errors: string[];
 
-   constructor(private location: Location,
+  // before edit appStatus
+  beforeEditAppStatus=0;
+  showEditAppStatusDatePicker = false;
+
+  jobApplication = new JobApplication();  
+
+  // appStatusChangedOn/appliedOn validation for null
+  appStatusChangedOnValid = true;
+  appliedOnValid = true;
+
+  constructor(private location: Location,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     public localDataService: LocalDataService,
@@ -80,14 +95,22 @@ export class EditJobAppComponent implements OnInit {
         agencyName: [''],
         webURL: [''],
         contactPersonName: ['', [Validators.required]],
-        contactEmail: ['', [Validators.required]],
-        phoneNumber: ['', [Validators.pattern("^[0-9]*$")]],
+        contactEmail: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
+        phoneNumber: ['', [Validators.pattern(this.phoneRegx)]],
         city: ['', [Validators.required]],
         province: ['', [Validators.required]],
-        appliedOn: ['', [Validators.required]],
+        appliedOn: [''],
         appStatus: ['', [Validators.required]],
         followUpNotes: [''],
+        appStatusChangedOn: ['']
       });
+
+      var appliedOnDate = new Date(this.selectedJob.appliedOn.toString());            
+      const appliedOnDateDisplay = new NgbDate(appliedOnDate.getFullYear(), appliedOnDate.getMonth()+1, appliedOnDate.getDate());
+      
+      var currentDate = new Date();
+      const currentDateDisplay = new NgbDate(currentDate.getFullYear(), currentDate.getMonth()+1, currentDate.getDate());
+      
       // patch form values
       this.jobAppEditForm.setValue({
         companyName: this.selectedJob.companyName,
@@ -98,23 +121,112 @@ export class EditJobAppComponent implements OnInit {
         phoneNumber: this.selectedJob.phoneNumber,
         city: this.selectedJob.city,
         province: this.selectedJob.province,
-        appliedOn: this.selectedJob.appliedOn,
+        appliedOn: appliedOnDateDisplay,
         appStatus: this.selectedJob.appStatus,
         followUpNotes: this.selectedJob.followUpNotes,
+        appStatusChangedOn: currentDateDisplay,
       });
+
+      this.beforeEditAppStatus = this.selectedJob.appStatus;
 
       console.log(this.jobAppEditForm.value);
     }
   }
 
+  onAppStatusChange(event) {
+    if (event.target.value.toString() == this.beforeEditAppStatus.toString()) {
+      this.showEditAppStatusDatePicker = false;
+    }
+    else {
+      this.showEditAppStatusDatePicker = true;
+    }
+  }
+
+  changeProvince(e) {
+    // reset city, when province gets changed
+    this.cities = [];
+    this.jobAppEditForm.controls['city'].setValue('');
+
+    if (e.value == "") {
+      return;
+    }
+    else {
+      var cities = this.localDataService.getCities(e.value);
+      this.cities = cities;
+    }
+  }
+  
   get f() {
     return this.jobAppEditForm.controls;
   }
 
-  onSubmit(): void { 
-    console.log(this.jobAppEditForm.value["appStatus"]);
+  onSubmit(): void {
+   
+    this.appStatusChangedOnValid = true;      
+    this.appliedOnValid = true;      
+    this.submitted = true;
+    
+    // prepare object for api call
+    this.jobApplication = this.jobAppEditForm.value;
+    this.jobApplication.jobApplicationId = this.selectedJob.jobApplicationId;
+  
+    // complete form validation
+    if (!this.jobAppEditForm.valid) {
+      console.log('Invalid Form!');   
+      return;
+    }
     
 
+    var jobApplicationEditVM = {};
+
+    // appliedOn validation
+    if (this.jobAppEditForm.value["appliedOn"] === null) {
+      this.appliedOnValid = false;
+      return;
+    }
+    else
+      this.appliedOnValid = true;
+
+    // appStatusChangedOn validation
+    if (this.jobAppEditForm.value["appStatus"].toString() !== this.beforeEditAppStatus.toString()) {
+
+      if (this.jobAppEditForm.value["appStatusChangedOn"] === null) {
+        this.appStatusChangedOnValid = false;
+        return;
+      }
+   
+      this.appStatusChangedOnValid = true;      
+      
+      jobApplicationEditVM = {
+        jobApplication: this.jobApplication,
+        appStatusChanged: true,
+        appStatusChangedOn: this.jobAppEditForm.value["appStatusChangedOn"]
+      }
+    }
+    else {
+      // patch for appStatusChangedOn
+      // this.jobAppEditForm.get("appStatusChangedOn").patchValue(new Date());
+
+      jobApplicationEditVM = {
+        jobApplication: this.jobApplication,
+        appStatusChanged: false,
+        appStatusChangedOn: new Date()
+      }
+    }
+    console.log(jobApplicationEditVM);
+
+    this.reset();
   }
 
+  goBack(){
+    this.router.navigate(['/follow-up']);
+  }
+
+  reset() {
+    this.jobAppEditForm.reset();
+    this.submitted = false;
+
+    // disable browser back button
+    // history.pushState(null, '');
+  }  
 }
