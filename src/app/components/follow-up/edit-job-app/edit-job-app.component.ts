@@ -134,7 +134,7 @@ export class EditJobAppComponent implements OnInit {
   }
 
   onAppStatusChange(event) {
-    if (event.target.value.toString() == this.beforeEditAppStatus.toString()) {
+    if (event.target.value.toString() === this.beforeEditAppStatus.toString()) {
       this.showEditAppStatusDatePicker = false;
     }
     else {
@@ -162,8 +162,8 @@ export class EditJobAppComponent implements OnInit {
 
   onSubmit(): void {
    
-    this.appStatusChangedOnValid = true;      
-    this.appliedOnValid = true;      
+    this.appStatusChangedOnValid = true;
+    this.appliedOnValid = true;
     this.submitted = true;
     
     // prepare object for api call
@@ -172,12 +172,20 @@ export class EditJobAppComponent implements OnInit {
   
     // complete form validation
     if (!this.jobAppEditForm.valid) {
-      console.log('Invalid Form!');   
+      console.log('Invalid Form!');
       return;
     }
     
 
-    var jobApplicationEditVM = {};
+    var jobApplicationEditVM = {
+      jobApplication:
+      {
+        appliedOn: null,
+        appStatus: 0,
+      },
+      appStatusChanged: false,
+      appStatusChangedOn: null
+    };
 
     // appliedOn validation
     if (this.jobAppEditForm.value["appliedOn"] === null) {
@@ -195,28 +203,69 @@ export class EditJobAppComponent implements OnInit {
         return;
       }
    
-      this.appStatusChangedOnValid = true;      
+      this.appStatusChangedOnValid = true;
       
       jobApplicationEditVM = {
-        jobApplication: this.jobApplication,
+        jobApplication: {
+          ...this.jobApplication,
+          appStatus: Number(this.jobApplication.appStatus)
+        },
         appStatusChanged: true,
         appStatusChangedOn: this.jobAppEditForm.value["appStatusChangedOn"]
       }
-    }
-    else {
-      // patch for appStatusChangedOn
-      // this.jobAppEditForm.get("appStatusChangedOn").patchValue(new Date());
-
+      var appStatusChangedOnDate = new Date(jobApplicationEditVM.appStatusChangedOn.year + '/' + jobApplicationEditVM.appStatusChangedOn.month + '/' + jobApplicationEditVM.appStatusChangedOn.day);
       jobApplicationEditVM = {
-        jobApplication: this.jobApplication,
+        ...jobApplicationEditVM,
+        appStatusChangedOn: appStatusChangedOnDate
+      }
+    }
+    else {    
+      jobApplicationEditVM = {
+        jobApplication: {
+          ...this.jobApplication,
+          appStatus: Number(this.jobApplication.appStatus)
+        },
         appStatusChanged: false,
         appStatusChangedOn: new Date()
       }
-    }
-    console.log(jobApplicationEditVM);
+    }   
+    
 
-    this.reset();
-  }
+    var appliedOnDate = new Date(jobApplicationEditVM.jobApplication.appliedOn.year + '/' + jobApplicationEditVM.jobApplication.appliedOn.month + '/' + jobApplicationEditVM.jobApplication.appliedOn.day);
+    jobApplicationEditVM.jobApplication = {
+      ...jobApplicationEditVM.jobApplication,
+      appliedOn: appliedOnDate
+    }   
+    
+    
+    this.dataService.editJobApp(jobApplicationEditVM)
+      .subscribe(
+        response => {
+          console.log(response);
+          if (response.responseCode === 0) {
+            // success    
+            this.apiResponse = response.responseMessage;
+            this.responseColor = 'green';
+
+            this.reset();
+
+            setTimeout(() => {
+              this.router.navigate(['/follow-up']);
+              this.apiResponse = '';
+            }, 3000);
+          }
+        },
+        error => {
+          this.apiResponse = '';
+          this.responseColor = 'red';
+          this.errors = [];
+
+          if (error.status === 400) {
+            console.log(error);
+          }
+        }
+      );
+    }
 
   goBack(){
     this.router.navigate(['/follow-up']);
@@ -225,6 +274,7 @@ export class EditJobAppComponent implements OnInit {
   reset() {
     this.jobAppEditForm.reset();
     this.submitted = false;
+    this.errors = [];
 
     // disable browser back button
     // history.pushState(null, '');
