@@ -1,10 +1,31 @@
-<div class="mainContainer">
+<!-- remove -job-application-->
+<!-- modal-->
+<div class="container">
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Job-Application ## {{removeJobAppId}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Are you sure want to remove this Job-Application ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('YES')">YES</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('NO')">NO</button>
+        </div>
+    </ng-template>
+</div>
 
+
+<div class="mainContainer">
     <!-- filter job-apps-->
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
-            filter job apps!
+          
         </div>
         <div class="col-sm-1"></div>
     </div>
@@ -29,6 +50,7 @@
                             <i class="bi bi-pencil-fill"></i>
                         </button>&nbsp;&nbsp;
                         <button type="button"  
+                            (click)="removeJobApp(mymodal,job)" 
                             class="btn removeBtn">
                             <i class="bi bi-calendar-x"></i>
                         </button>&nbsp;&nbsp;
