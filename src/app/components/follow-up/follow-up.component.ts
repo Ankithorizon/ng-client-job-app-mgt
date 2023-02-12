@@ -35,37 +35,6 @@ export class FollowUpComponent implements OnInit {
     public dataService: DataService,
     private router: Router) { }
 
-  // modal
-  removeJobApp(content:any,selectedJob) {
-    this.removeJobAppId = selectedJob.jobApplicationId;
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then((result) => {
-        console.log(result);
-        if (result === 'YES') {
-          console.log('Remove job-app');
-        }
-        else if (result === 'NO') {
-          console.log('Return back to job-apps');
-        }
-        // this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-  }  
-  /*
-  private getDismissReason(reason: any): string {
-    console.log(reason);
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
-  */
-
   ngOnInit(): void {
     this.getAppStatusTypes();
     this.getAllJobApps();
@@ -96,10 +65,12 @@ export class FollowUpComponent implements OnInit {
         });
   }
 
+  // view job-app
   viewJobApp(selectedJob) {
     this.router.navigate(['/view-job'], { state: { selectedJob: { selectedJob } } });
   }
 
+  // edit job-app
   editJobApp(selectedJob) {
     this.router.navigate(['/edit-job'], { state: { selectedJob: { selectedJob } } });
   }
@@ -107,6 +78,64 @@ export class FollowUpComponent implements OnInit {
   // follow-up-notes
   openPanel(jobId) {
     this.displayPanelJobId = jobId;
+  }
+
+  // delete job-app
+  // modal
+  removeJobApp(content:any,selectedJob) {
+    this.removeJobAppId = selectedJob.jobApplicationId;
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then((result) => {
+        console.log(result);
+        if (result === 'YES') {
+          this.deleteJobApp(selectedJob);
+        }
+        else if (result === 'NO') {
+          console.log('Return back to job-apps');
+        }
+        // this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }  
+  /*
+  private getDismissReason(reason: any): string {
+    console.log(reason);
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+  */
+  deleteJobApp(jobAppToDelete) {      
+    this.dataService.deleteJobApp(jobAppToDelete)
+      .subscribe(
+        response => {
+          this.toastService.showSuccess('', response.responseMessage);   
+
+          // delete job-app from jobApps[]
+          this.jobApps = this.jobApps.filter(function( obj ) {
+            return obj.jobApplicationId !== jobAppToDelete.jobApplicationId;
+          });
+        },
+        error => {     
+          if (error.status === 500) {
+            this.toastService.showError('', error.error);    
+          }
+          if (error.status === 400) {
+            if (error.error.responseCode < 0) {
+              this.toastService.showError('', error.error.responseMessage);    
+            }
+            else {
+              this.toastService.showError('', 'Error : Bad Request!');    
+            }              
+          }
+        }
+      );
   }
  
 }
