@@ -247,11 +247,10 @@ export class EditJobAppComponent implements OnInit {
             this.apiResponse = response.responseMessage;
             this.responseColor = 'green';
 
-            this.reset();
-
             setTimeout(() => {
-              this.router.navigate(['/follow-up']);
+              this.reset();
               this.apiResponse = '';
+              this.router.navigate(['/follow-up']);              
             }, 3000);
           }
         },
@@ -260,9 +259,19 @@ export class EditJobAppComponent implements OnInit {
           this.responseColor = 'red';
           this.errors = [];
 
-          if (error.status === 400) {
-            console.log(error);
+          console.log(error);
+
+          if (error.status === 400) {  
+            if (error.error.responseCode < 0) {              
+              this.apiResponse = error.error.responseMessage;
+            }
+            else {
+              this.errors = this.localDataService.display400andEx(error, "Edit-Job-Application");
+            }
           }
+          if (error.status === 500) {
+            this.apiResponse = error.error;
+          }          
         }
       );
     }
@@ -275,8 +284,10 @@ export class EditJobAppComponent implements OnInit {
     this.jobAppEditForm.reset();
     this.submitted = false;
     this.errors = [];
+    this.apiResponse = '';
+    this.responseColor = '';
 
     // disable browser back button
-    // history.pushState(null, '');
-  }  
+    history.pushState(null, '');  
+  }
 }

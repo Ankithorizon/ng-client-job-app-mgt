@@ -11,20 +11,28 @@
                             </div>
                         </h4>
                         <div *ngIf="apiResponse">
-                            <h4 *ngIf="apiResponse">
+                            <h5 *ngIf="apiResponse && responseColor=='green'" 
+                                class="apiResponseSuccess">
                                 <span [style.color]="responseColor">
                                     {{apiResponse}}
                                 </span>
-                            </h4>
-                            <h5 *ngIf="errors && errors.length>0">
-                                <ul [style.color]="responseColor">
-                                    <li *ngFor="let error of errors">
-                                        {{ error }}
-                                    </li>
-                                </ul>
+                            </h5>   
+                            <h5 *ngIf="apiResponse && responseColor=='red'" 
+                                class="apiResponseError">
+                                <span [style.color]="responseColor">
+                                    {{apiResponse}}
+                                </span>
                             </h5>
-                            <p></p>
-                            <hr />
+                        </div>
+                        <div *ngIf="errors?.length>0">
+                            <h5 class="apiResponseError">
+                                <div [style.color]="responseColor">
+                                    <span *ngFor="let error of errors">
+                                        <span>* {{ error }}</span>
+                                        <br />
+                                    </span>
+                                </div>
+                            </h5>
                         </div>
                     </div>
                     <div class="card-body">
@@ -40,10 +48,11 @@
                                         <div class="col-sm-6 appStatusField">
                                             <div class="form-group formField">
                                                 <label>Application Status</label>
-                                                <select class="form-control" 
+                                                <select class="form-control appStatusOptions" 
                                                     (change)="onAppStatusChange($event)"
                                                     formControlName="appStatus">
-                                                    <option value={{x.value}} *ngFor="let x of appStatusTypes">
+                                                    <option value={{x.value}} 
+                                                        *ngFor="let x of appStatusTypes">
                                                         {{x.text}}
                                                     </option>
                                                 </select>

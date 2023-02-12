@@ -18,6 +18,21 @@
     color: green;
     font-size: large;
 }
+.apiResponseError{    
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid red;
+    border-radius: 20px;
+}
+.apiResponseSuccess {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid green;
+    border-radius: 20px;
+}
+
 .mainContainer {
     padding: 20px;
 }
@@ -47,5 +62,9 @@
 
 .invalidDate{
     color: red;
+    font-weight: bold;
+}
+
+.appStatusOptions {
     font-weight: bold;
 }
