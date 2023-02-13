@@ -67,11 +67,6 @@ export class EditJobAppComponent implements OnInit {
     private router: Router) {
   }
 
-  ngOnDestroy(): void {
-    console.log('destroy');
-    this.myState.selectedJob = null;   
-  }
-
   ngOnInit(): void {
     this.myState = this.location.getState();
 

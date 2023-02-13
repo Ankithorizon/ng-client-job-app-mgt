@@ -137,5 +137,11 @@ export class FollowUpComponent implements OnInit {
         }
       );
   }
+
+  // filter job-apps
+  dataFilterDoneHandler(jobApps_: any[]) {
+    console.log('received filter data @parent,,,', jobApps_);
+    this.jobApps = jobApps_;
+  }
  
 }

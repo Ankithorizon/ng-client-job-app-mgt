@@ -15,6 +15,7 @@ export class LocalDataService {
     return this.AppStatusTypes;
   }
 
+  
 
   // return color as per appStatusType
   getAppStatusTypeColor(appStatusType) {
