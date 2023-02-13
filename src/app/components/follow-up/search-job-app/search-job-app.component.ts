@@ -21,6 +21,7 @@ export class SearchJobAppComponent implements OnInit {
   provinces = [];
   sProvince = '';
   sCity = '';
+  sContactPersonName = '';
 
   hoveredDate: NgbDate | null = null;
 
@@ -47,10 +48,11 @@ export class SearchJobAppComponent implements OnInit {
     this.provinces = this.localDataService.getProvinces();
     }
   
-    changeProvince(e) {
+  changeProvince(e) {
     console.log(e.target.value);
     this.cities = [];
     this.sCity = '';
+    this.sProvince = e.target.value;
 
     if (e.target.value == "") {
       return;
@@ -59,6 +61,10 @@ export class SearchJobAppComponent implements OnInit {
       var cities_ = this.localDataService.getCities(e.target.value);
       this.cities = cities_;
     }
+  }
+   changeCity(e) {
+    console.log(e.target.value);  
+    this.sCity = e.target.value;
   }
   
 	onDateSelection(date: NgbDate) {
@@ -102,10 +108,16 @@ export class SearchJobAppComponent implements OnInit {
     var filterAppliedOnStart = new Date();
     var filterAppliedOnEnd = new Date();
 
-    var filterProvince = 'MB';
-    var filterCity = 'Winnipeg';
-    var filterContactPersonName = '';
+    // var filterProvince = 'MB';
+    var filterProvince = this.sProvince;
+    // var filterCity = 'Winnipeg';
+    var filterCity = this.sCity;
+    var filterContactPersonName = this.sContactPersonName;
     
+
+
+    console.log(filterProvince, filterCity, filterContactPersonName);
+
     // var jobApps_ = this.jobApps;
     var jobApps_ = [...this.jobApps];
 
