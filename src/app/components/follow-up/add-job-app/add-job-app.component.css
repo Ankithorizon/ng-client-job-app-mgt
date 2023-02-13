@@ -64,8 +64,8 @@
 }
 
 .invalidDate {
-    color: red;
-    font-weight: bold;
+    color: rgb(197, 22, 22);
+    font-size: small;
 }
 
 .appStatusOptions {
@@ -75,3 +75,4 @@
 .addjobAppHeader {
     background-color: lightseagreen;
 }
+

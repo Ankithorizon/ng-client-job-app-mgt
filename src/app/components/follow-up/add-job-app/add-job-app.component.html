@@ -1,1 +1,232 @@
-<p>add-job-app works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header componentHeader addjobAppHeader">
+                    <h4>
+                        <div class="jobAppHeader">
+                            <u>[APPLY]</u> Job-Application 
+                        </div>
+                    </h4>
+                    <div *ngIf="apiResponse">
+                        <h5 *ngIf="apiResponse && responseColor=='green'" 
+                            class="apiResponseSuccess">
+                            <span [style.color]="responseColor">
+                                {{apiResponse}}
+                            </span>
+                        </h5>
+                        <h5 *ngIf="apiResponse && responseColor=='red'" 
+                            class="apiResponseError">
+                            <span [style.color]="responseColor">
+                                {{apiResponse}}
+                            </span>
+                        </h5>
+                    </div>
+                    <div *ngIf="errors?.length>0">
+                        <h5 class="apiResponseError">
+                            <div [style.color]="responseColor">
+                                <span *ngFor="let error of errors">
+                                    <span>* {{ error }}</span>
+                                    <br />
+                                </span>
+                            </div>
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form *ngIf="applyToJobForm" 
+                        class="form-applyJobApp"
+                        [formGroup]="applyToJobForm"
+                        (ngSubmit)="onSubmit()">
+
+                        <div class="row">
+                            <div class="col-md-1 mx-auto"></div>
+                            <div class="col-md-10 mx-auto">                              
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Contact Person</label>
+                                            <input type="text" 
+                                                formControlName="contactPersonName" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['contactPersonName'].errors }" />
+                                            <div *ngIf="submitted && f['contactPersonName'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['contactPersonName'].errors['required']">
+                                                    Contact Person is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Contact Email</label>
+                                            <input type="text"
+                                                formControlName="contactEmail" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['contactEmail'].errors }" />
+                                            <div *ngIf="submitted && f['contactEmail'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['contactEmail'].errors['required']">
+                                                    Contact Email is required
+                                                </div>
+                                                <div *ngIf="f['contactEmail'].errors['pattern']">
+                                                    Invalid Contact Email
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Company Name</label>
+                                            <input type="text" 
+                                                formControlName="companyName" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Agency Name</label>
+                                            <input type="text" formControlName="agencyName" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['agencyName'].errors }" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Web URL</label>
+                                            <input type="text" 
+                                                formControlName="webURL" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['webURL'].errors }" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Phone Number</label>
+                                            <input type="text" 
+                                                formControlName="phoneNumber" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }" />
+
+                                            <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['phoneNumber'].errors['pattern']">
+                                                    Invalid Phone Number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Province</label>
+                                            <select 
+                                                [ngClass]="{ 'is-invalid': submitted && f['province'].errors }"
+                                                (change)="changeProvince($event)" 
+                                                class="form-control" 
+                                                formControlName="province">
+                                                <option value="">Choose Province</option>
+                                                <option value={{x}} *ngFor="let x of provinces">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['province'].errors" 
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['province'].errors['required']">
+                                                    Province is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>City</label>
+                                            <select 
+                                                [ngClass]="{ 'is-invalid': submitted && f['city'].errors }"
+                                                class="form-control" 
+                                                formControlName="city">
+                                                <option value="">Choose City</option>
+                                                <option value={{x}} *ngFor="let x of cities">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['city'].errors['required']">
+                                                    City is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Applied On</label>
+
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" 
+                                                        [ngClass]="{ 'is-invalid': submitted && f['appliedOn'].errors }"
+                                                        placeholder="yyyy-mm-dd" 
+                                                        name="dp"
+                                                        formControlName="appliedOn" 
+                                                        ngbDatepicker 
+                                                        #d="ngbDatepicker">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-outline-secondary" 
+                                                        (click)="d.toggle()"
+                                                        type="button">
+                                                        <i class="bi bi-calendar-day"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>
+                                            <div *ngIf="submitted && f['appliedOn'].errors" 
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['appliedOn'].errors['required']">
+                                                    Applied On is required
+                                                </div>
+                                            </div>    
+                                            <div *ngIf="submitted && hasError('appliedOn')" class="invalidDate">
+                                                Applied On is required
+                                            </div>                                       
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1 mx-auto"></div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-success">
+                                        Apply Job-Application
+                                    </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button (click)="goBack()" 
+                                        type="button" 
+                                        class="btn btn-primary cancelBtn">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

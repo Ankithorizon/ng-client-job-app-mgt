@@ -58,7 +58,6 @@ export class EditJobAppComponent implements OnInit {
 
   // appStatusChangedOn/appliedOn validation for null
   appStatusChangedOnValid = true;
-  appliedOnValid = true;
 
   constructor(private location: Location,
     private fb: FormBuilder,
@@ -68,6 +67,10 @@ export class EditJobAppComponent implements OnInit {
     private router: Router) {
   }
 
+  ngOnDestroy(): void {
+    console.log('destroy');
+    this.myState.selectedJob = null;   
+  }
 
   ngOnInit(): void {
     this.myState = this.location.getState();
@@ -99,7 +102,7 @@ export class EditJobAppComponent implements OnInit {
         phoneNumber: ['', [Validators.pattern(this.phoneRegx)]],
         city: ['', [Validators.required]],
         province: ['', [Validators.required]],
-        appliedOn: [''],
+        appliedOn: ['', Validators.required],
         appStatus: ['', [Validators.required]],
         followUpNotes: [''],
         appStatusChangedOn: ['']
@@ -143,27 +146,36 @@ export class EditJobAppComponent implements OnInit {
   }
 
   changeProvince(e) {
-    // reset city, when province gets changed
+    console.log(e.target.value);
     this.cities = [];
     this.jobAppEditForm.controls['city'].setValue('');
 
-    if (e.value == "") {
+    if (e.target.value == "") {
       return;
     }
     else {
-      var cities = this.localDataService.getCities(e.value);
-      this.cities = cities;
+      var cities_ = this.localDataService.getCities(e.target.value);
+      this.cities = cities_;
     }
   }
   
   get f() {
     return this.jobAppEditForm.controls;
   }
+  hasError = (controlName: string) => {
+    if (this.jobAppEditForm.controls[controlName].value === null || this.jobAppEditForm.controls[controlName].value === '')
+      return true;
+    else
+      return false;
+  }
 
   onSubmit(): void {
    
+    this.errors = [];
+    this.apiResponse = '';
+    this.responseColor = '';
+
     this.appStatusChangedOnValid = true;
-    this.appliedOnValid = true;
     this.submitted = true;
     
     // prepare object for api call
@@ -186,18 +198,11 @@ export class EditJobAppComponent implements OnInit {
       appStatusChanged: false,
       appStatusChangedOn: null
     };
-
-    // appliedOn validation
-    if (this.jobAppEditForm.value["appliedOn"] === null) {
-      this.appliedOnValid = false;
-      return;
-    }
-    else
-      this.appliedOnValid = true;
-
+    
     // appStatusChangedOn validation
     if (this.jobAppEditForm.value["appStatus"].toString() !== this.beforeEditAppStatus.toString()) {
 
+      
       if (this.jobAppEditForm.value["appStatusChangedOn"] === null) {
         this.appStatusChangedOnValid = false;
         return;
@@ -205,6 +210,7 @@ export class EditJobAppComponent implements OnInit {
    
       this.appStatusChangedOnValid = true;
       
+
       jobApplicationEditVM = {
         jobApplication: {
           ...this.jobApplication,
