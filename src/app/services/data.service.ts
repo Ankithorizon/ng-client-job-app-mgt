@@ -35,4 +35,8 @@ export class DataService {
   deleteJobApp(jobAppData): Observable<any> {
     return this.http.post(this.JobApplication_API + '/deleteJobApp', jobAppData)
   }
+  // add jobApplication
+  addJobApp(jobAppData): Observable<any> {
+    return this.http.post(this.JobApplication_API + '/addJobApp', jobAppData)
+  }
 }

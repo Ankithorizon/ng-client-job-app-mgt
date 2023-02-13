@@ -1,6 +1,7 @@
 .mainContainer {
     padding: 20px;
 }
+
 .componentHeader {
     background-color: lightyellow;
 }
@@ -18,13 +19,15 @@
     color: green;
     font-size: large;
 }
-.apiResponseError{    
+
+.apiResponseError {
     background-color: white;
     padding: 10px;
     text-align: center;
     border: 2px solid red;
     border-radius: 20px;
 }
+
 .apiResponseSuccess {
     background-color: white;
     padding: 10px;
@@ -51,16 +54,16 @@
     font-weight: bold;
 }
 
-.formField{
-    padding-bottom: 10px    
+.formField {
+    padding-bottom: 10px
 }
 
-.appStatusField{
+.appStatusField {
     font-size: larger;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
-.invalidDate{
+.invalidDate {
     color: red;
     font-weight: bold;
 }
@@ -69,6 +72,6 @@
     font-weight: bold;
 }
 
-.editjobAppHeader{
-    background-color: lightskyblue;
+.addjobAppHeader {
+    background-color: lightseagreen;
 }
