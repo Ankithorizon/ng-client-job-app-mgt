@@ -140,10 +140,15 @@ export class FollowUpComponent implements OnInit {
       );
   }
 
+  // search-job-app child component returns filtered jobApps[]
   // filter job-apps
   dataFilterDoneHandler(jobApps_: any[]) {
     console.log('received filter data @parent,,,', jobApps_);
     this.jobApps = jobApps_;
   }
  
+  // resume-upload
+  resumeUpload(selectedJob) {
+    this.router.navigate(['/resume-upload'], { state: { selectedJob: { selectedJob } } });
+  }
 }

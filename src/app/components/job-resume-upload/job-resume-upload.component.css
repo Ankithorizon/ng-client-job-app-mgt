@@ -1,0 +1,68 @@
+.progress-bar {
+    padding: 0;
+}
+
+.progress {
+    width: 50px;
+}
+
+#fileInput {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+.messageFail {
+    color: red;
+    font-size: larger;
+}
+
+.messageSuccess {
+    color: green;
+    font-size: larger;
+}
+
+.message {
+    background-color: #ddd;
+    padding: 15px;
+    border: #aaa solid 1px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.mainContainer {
+    padding: 20px;
+}
+
+.componentHeader {
+    background-color: lightyellow;
+}
+
+.cancelBtn {
+    float: right;
+}
+
+.mainContainer {
+    padding: 20px;
+}
+
+.jobAppHeader {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.resumeUploadHeader {
+    background-color: lightseagreen;
+}
+.jobAppDetails {
+    padding: 5px;
+    font-size: large;
+}
+.jobAppDetailsSpecial {
+    font-weight: bold;
+}

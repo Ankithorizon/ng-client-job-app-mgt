@@ -1,0 +1,69 @@
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header componentHeader resumeUploadHeader">
+                    <h4>
+                        <div class="jobAppHeader">
+                            <u>[RESUME-UPLOAD]</u> Job-Application ## {{selectedJob.jobApplicationId}}
+                            <p></p>
+                            <span [ngStyle]="{'color': localDataService.getAppStatusTypeColor(selectedJob.appStatus)}"
+                                *ngIf="localDataService.getAppStatusTypes()?.length>0">
+                                [{{localDataService.getAppStatusTypes()[selectedJob.appStatus]}}]
+                            </span>
+                        </div>                    
+                    </h4>                    
+                </div>
+                <div *ngIf="selectedJob" class="card-body">    
+                    <div class="row">                    
+                        <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                            Company Name :
+                            <span *ngIf="selectedJob.companyName; else notAv">
+                                {{selectedJob.companyName}}
+                            </span>                         
+                        </div>
+                        <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                            Agency :
+                            <span *ngIf="selectedJob.agencyName; else notAv">
+                                {{selectedJob.agencyName}}
+                            </span>
+                        </div>
+                        <div class="col-sm-6 jobAppDetails">
+                            Company URL :
+                            <span *ngIf="selectedJob.webURL; else notAv">
+                                {{selectedJob.webURL}}
+                            </span>
+                        </div>
+                        <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                            Contact Person Name : {{selectedJob.contactPersonName}}
+                        </div>
+                        <div class="col-sm-6 jobAppDetails">
+                            Phone :
+                            <span *ngIf="selectedJob.phoneNumber; else notAv">
+                                {{selectedJob.phoneNumber}}
+                            </span>
+                        </div>
+                        <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                            Contact Email : {{selectedJob.contactEmail}}
+                        </div>
+                        <div class="col-sm-6 jobAppDetails">
+                            City : {{selectedJob.city}}
+                        </div>
+                        <div class="col-sm-6 jobAppDetails">
+                            Province : {{selectedJob.province}}
+                        </div>
+                        <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                            Applied : {{selectedJob.appliedOn}}
+                            <!-- Applied : {{jobAppData.appliedOn | date : "MMM-dd, y"}}-->
+                        </div>
+                    </div>
+                    <ng-template #notAv>
+                        N/A
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

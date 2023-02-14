@@ -24,6 +24,18 @@ export class LocalDataService {
   }
 
   // return color as per appStatusType
+  /*
+    public enum AppStatusType
+    {
+        Applied,
+        Follow_Up,
+        Client_Response,
+        Interview_Setup,
+        Interview_Done,
+        Final_Result,
+        Closed
+    }
+  */
   getAppStatusTypeColor(appStatusType) {
     if (appStatusType === 0)
       return 'maroon';

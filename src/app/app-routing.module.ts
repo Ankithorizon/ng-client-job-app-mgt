@@ -6,6 +6,7 @@ import { FollowUpComponent } from './components/follow-up/follow-up.component';
 import { ViewJobAppComponent } from './components/follow-up/view-job-app/view-job-app.component';
 import { EditJobAppComponent } from './components/follow-up/edit-job-app/edit-job-app.component';
 import { AddJobAppComponent } from './components/follow-up/add-job-app/add-job-app.component';
+import { JobResumeUploadComponent } from './components/job-resume-upload/job-resume-upload.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'view-job', component: ViewJobAppComponent },
   { path: 'edit-job', component: EditJobAppComponent },
   { path: 'apply-job', component: AddJobAppComponent },
+  { path: 'resume-upload', component: JobResumeUploadComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
