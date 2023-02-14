@@ -99,11 +99,18 @@
                         </div>
                         <div>
                             <button type="button" 
-                                
+                                (click)="resumeDownload(job)"
                                 class="btn downloadBtn">
                                 <i class="bi bi-cloud-arrow-down"></i>
                                 Resume
                             </button>
+                            <span *ngIf="downloadStatus && selectedJob==job" 
+                                [style.color]="downloadClass">
+                                <p></p>
+                                <b>
+                                    {{downloadStatus}}
+                                </b>
+                            </span>
                         </div>
                     </div>
                     <div class="col-sm-6">
