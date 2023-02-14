@@ -36,8 +36,9 @@ export class SearchJobAppComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter)
   {
-		this.fromDate = calendar.getToday();
-		this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    // default assign date
+		// this.fromDate = calendar.getToday();
+		// this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 	}
 
    ngOnInit(): void {  
@@ -104,47 +105,60 @@ export class SearchJobAppComponent implements OnInit {
 
 
   // filter job-apps
-  filterNow() {
-    var filterAppliedOnStart = new Date();
-    var filterAppliedOnEnd = new Date();
+  filterNow() { 
 
-    // var filterProvince = 'MB';
     var filterProvince = this.sProvince;
-    // var filterCity = 'Winnipeg';
     var filterCity = this.sCity;
     var filterContactPersonName = this.sContactPersonName;
     
+    // province, city
+    var jobApps_ = [...this.localDataService.getJobApps()];
 
+    // contact-person-name
+    var jobApps__ = [];
 
-    console.log(filterProvince, filterCity, filterContactPersonName);
-
-    // var jobApps_ = this.jobApps;
-    var jobApps_ = [...this.jobApps];
-
+    // province
     if (filterProvince !== '') {
       jobApps_ = jobApps_.filter(function (job) {
         return job.province === filterProvince;
       });
     }
+    
+    // city
     if (filterCity !== '') {
       jobApps_ = jobApps_.filter(function (job) {
         return job.city === filterCity;
       });
     }
+    
+    // contact-person-name
     if (filterContactPersonName !== '') {
-      jobApps_ = jobApps_.filter(function (job) {
+      jobApps__ = this.localDataService.getJobApps().filter(function (job) {
         return job.contactPersonName === filterContactPersonName;
       });
     }
-    if (filterAppliedOnStart !== null && filterAppliedOnEnd !== null) {
-      jobApps_ = jobApps_.filter(function (job) {
+
+    // combine 2 arrays and remove duplicate
+    // province, city, contact-person-name
+    const result = [...new Set([...jobApps_, ...jobApps__])]
+  
+
+    // start-applied-on, end-applied-on
+    if (this.fromDate !== undefined && this.toDate !== undefined && this.fromDate !== null && this.toDate
+    !==null) {
+      var filterAppliedOnStart = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day);
+      var filterAppliedOnEnd = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day);
+      
+      jobApps_ = result.filter(function (job) {
         return moment(job.appliedOn).format("YYYY-MM-DD") <= moment(filterAppliedOnEnd).format("YYYY-MM-DD")
           && moment(job.appliedOn).format("YYYY-MM-DD") >= moment(filterAppliedOnStart).format("YYYY-MM-DD");
       });
     }
-    // return jobApps_ to parent-component
-    console.log('after filter in child comp,,, ', jobApps_);
-    
+    else {
+      jobApps_ = [...result];
+    }
+
+    // return jobApps_ to parent-component   
     this.dataFilterDone.emit(jobApps_);
   }
 }

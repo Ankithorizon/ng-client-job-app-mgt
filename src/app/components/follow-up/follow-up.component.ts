@@ -59,6 +59,7 @@ export class FollowUpComponent implements OnInit {
         data => {
           console.log(data);
           this.jobApps = data;
+          this.localDataService.setJobApps(data);
         },
         error => {
           console.log(error);

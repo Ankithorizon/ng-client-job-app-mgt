@@ -15,7 +15,13 @@ export class LocalDataService {
     return this.AppStatusTypes;
   }
 
-  
+  private JobApps;
+  setJobApps(val) {
+    this.JobApps = val;
+  }
+  getJobApps() {
+    return this.JobApps;
+  }
 
   // return color as per appStatusType
   getAppStatusTypeColor(appStatusType) {
