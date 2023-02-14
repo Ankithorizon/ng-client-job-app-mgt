@@ -3,17 +3,30 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <div class="card">
-                <div class="card-header componentHeader resumeUploadHeader">
-                    <h4>
-                        <div class="jobAppHeader">
-                            <u>[RESUME-UPLOAD]</u> Job-Application ## {{selectedJob.jobApplicationId}}
-                            <p></p>
-                            <span [ngStyle]="{'color': localDataService.getAppStatusTypeColor(selectedJob.appStatus)}"
-                                *ngIf="localDataService.getAppStatusTypes()?.length>0">
-                                [{{localDataService.getAppStatusTypes()[selectedJob.appStatus]}}]
-                            </span>
-                        </div>                    
-                    </h4>                    
+                <div class="card-header resumeUploadHeader">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h4>
+                                <div class="jobAppHeader">
+                                    <u>[RESUME-UPLOAD]</u> Job-Application ## {{selectedJob.jobApplicationId}}
+                                    <p></p>
+                                    <span [ngStyle]="{'color': localDataService.getAppStatusTypeColor(selectedJob.appStatus)}"
+                                        *ngIf="localDataService.getAppStatusTypes()?.length>0">
+                                        [{{localDataService.getAppStatusTypes()[selectedJob.appStatus]}}]
+                                    </span>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-sm-2">
+                            <button (click)="goBack()" 
+                                type="button" 
+                                class="btn btn-primary cancelBtn">
+                                <i class="bi bi-backspace-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                             
                 </div>
                 <div *ngIf="selectedJob" class="card-body">    
                     <div class="row">                    
@@ -54,13 +67,45 @@
                             Province : {{selectedJob.province}}
                         </div>
                         <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
-                            Applied : {{selectedJob.appliedOn}}
-                            <!-- Applied : {{jobAppData.appliedOn | date : "MMM-dd, y"}}-->
+                            Applied : {{selectedJob.appliedOn | date : "MMM-dd, y"}}                            
                         </div>
                     </div>
                     <ng-template #notAv>
                         N/A
                     </ng-template>
+
+
+                    <hr />
+                    <p></p>
+                    <!-- resume-upload-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="btn btn-default p-0">
+                                    <input type="file" 
+                                        (change)="selectFile($event)" />
+                                </label>
+                            </div>                        
+                            <div class="col-4">
+                                <button class="btn btn-success btn-sm" 
+                                    [disabled]="!currentFile" 
+                                    (click)="uploadResume()">
+                                    Upload
+                                </button>
+                            </div>
+                        </div> 
+                        <div *ngIf="currentFile" class="progress my-3">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                                attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                                {{ progress }}%
+                            </div>
+                        </div>
+                        <p></p>
+                        <div 
+                            *ngIf="message" 
+                            class="alert alert-secondary {{apiResponse}}" 
+                            role="alert">{{ message }}</div>                     
+                    </div>
                 </div>
             </div>
         </div>

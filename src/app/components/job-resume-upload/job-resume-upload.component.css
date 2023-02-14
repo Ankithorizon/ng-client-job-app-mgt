@@ -3,7 +3,7 @@
 }
 
 .progress {
-    width: 50px;
+    width: 300px;
 }
 
 #fileInput {
@@ -16,12 +16,12 @@
     top: 0px;
 }
 
-.messageFail {
+.fail {
     color: red;
     font-size: larger;
 }
 
-.messageSuccess {
+.success {
     color: green;
     font-size: larger;
 }
@@ -38,26 +38,12 @@
     padding: 20px;
 }
 
-.componentHeader {
-    background-color: lightyellow;
-}
-
 .cancelBtn {
     float: right;
 }
 
-.mainContainer {
-    padding: 20px;
-}
-
-.jobAppHeader {
-    text-align: center;
-    font-size: x-large;
-    font-weight: bold;
-}
-
 .resumeUploadHeader {
-    background-color: lightseagreen;
+    background-color: lightgreen;
 }
 .jobAppDetails {
     padding: 5px;
