@@ -1,1 +1,46 @@
-<p>track-job-app works!</p>
+<div *ngIf="selectedJob">
+    <div class="row mainContainer">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8  jobAppContainer">
+            <div class="row jobAppHeader">
+                <div class="col-sm-12">
+                    <span>
+                        <u>[TRACK]</u> Job-Application ## {{selectedJob.jobApplicationId}}
+                    </span>
+                    <br />
+                    <span [ngStyle]="{'color': localDataService.getAppStatusTypeColor(selectedJob.appStatus)}"
+                        *ngIf="localDataService.getAppStatusTypes()?.length>0">
+                        [{{localDataService.getAppStatusTypes()[selectedJob.appStatus]}}]
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar" 
+                        role="progressbar" 
+                        aria-valuenow="100" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                        style="width:{{bar1}}%">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        style="width:{{bar2}}%">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+</div>
+
+
+

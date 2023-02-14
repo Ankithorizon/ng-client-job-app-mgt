@@ -72,6 +72,11 @@ export class FollowUpComponent implements OnInit {
         });
   }
 
+  // track job-app
+  trackJobApp(selectedJob) {
+    this.router.navigate(['/track-job'], { state: { selectedJob: { selectedJob } } });
+  }
+
   // view job-app
   viewJobApp(selectedJob) {
     this.router.navigate(['/view-job'], { state: { selectedJob: { selectedJob } } });
