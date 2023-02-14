@@ -25,6 +25,7 @@ import { EditJobAppComponent } from './components/follow-up/edit-job-app/edit-jo
 import { AddJobAppComponent } from './components/follow-up/add-job-app/add-job-app.component';
 import { SearchJobAppComponent } from './components/follow-up/search-job-app/search-job-app.component';
 import { JobResumeUploadComponent } from './components/job-resume-upload/job-resume-upload.component';
+import { TrackJobAppComponent } from './components/follow-up/track-job-app/track-job-app.component';
 
 
 // services
@@ -40,6 +41,7 @@ import { JobResumeUploadComponent } from './components/job-resume-upload/job-res
     AddJobAppComponent,
     SearchJobAppComponent,
     JobResumeUploadComponent,
+    TrackJobAppComponent,
   ],
   imports: [
     BrowserModule,

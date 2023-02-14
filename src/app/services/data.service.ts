@@ -40,6 +40,10 @@ export class DataService {
   addJobApp(jobAppData): Observable<any> {
     return this.http.post(this.JobApplication_API + '/addJobApp', jobAppData)
   }
+  // track jobApplication
+  trackJobApp(jobAppId): Observable<any> {
+    return this.http.get<any>(this.JobApplication_API + '/trackJobApp/' + jobAppId);
+  }
 
   // resume-upload
   uploadResume(resumeUpload: ResumeUpload): Observable<HttpEvent<any>> {
