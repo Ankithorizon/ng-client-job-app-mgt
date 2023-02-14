@@ -122,6 +122,7 @@ export class FollowUpComponent implements OnInit {
           this.jobApps = this.jobApps.filter(function( obj ) {
             return obj.jobApplicationId !== jobAppToDelete.jobApplicationId;
           });
+          this.localDataService.setJobApps(this.jobApps);
         },
         error => {     
           if (error.status === 500) {

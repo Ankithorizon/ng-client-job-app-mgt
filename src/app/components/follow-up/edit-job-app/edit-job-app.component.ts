@@ -250,7 +250,6 @@ export class EditJobAppComponent implements OnInit {
 
             setTimeout(() => {
               this.reset();
-              this.apiResponse = '';
               this.router.navigate(['/follow-up']);              
             }, 3000);
           }
