@@ -16,3 +16,43 @@
     padding: 5px;
     margin-bottom: 10px;
 }
+.jobAppDetails {
+    padding: 5px;
+    font-size: large;
+}
+.jobAppDetailsSpecial {
+    font-weight: bold;
+}
+
+.Applied{
+    width: 25%;
+    background-color: maroon;
+}
+.Follow_Up {
+    width: 35%;
+    background-color: blue;
+}
+.Client_Response {
+    width: 50%;
+    background-color: green;
+}
+.Interview_Setup{
+    width: 70%;
+    background-color: red;
+}
+.Interview_Done {
+    width: 80%;
+    background-color: purple;
+}
+.Final_Result {
+    width: 90%;
+    background-color: purple;
+}
+.Closed {
+    width: 100%;
+    background-color: orange;
+}
+.progress{
+    height: 30px;
+    font-weight: bold;
+}

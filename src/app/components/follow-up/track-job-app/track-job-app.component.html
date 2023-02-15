@@ -15,26 +15,66 @@
                     </span>
                 </div>
             </div>
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar" 
-                        role="progressbar" 
-                        aria-valuenow="100" 
-                        aria-valuemin="0" 
-                        aria-valuemax="100"
-                        style="width:{{bar1}}%">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </div>
             <p></p>
             <div class="row">
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Company Name :
+                    <span *ngIf="selectedJob.companyName; else notAv">
+                        {{selectedJob.companyName}}
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Agency :
+                    <span *ngIf="selectedJob.agencyName; else notAv">
+                        {{selectedJob.agencyName}}
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Company URL :
+                    <span *ngIf="selectedJob.webURL; else notAv">
+                        {{selectedJob.webURL}}
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Contact Person Name : {{selectedJob.contactPersonName}}
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Phone :
+                    <span *ngIf="selectedJob.phoneNumber; else notAv">
+                        {{selectedJob.phoneNumber}}
+                    </span>
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Contact Email : {{selectedJob.contactEmail}}
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    City : {{selectedJob.city}}
+                </div>
+                <div class="col-sm-6 jobAppDetails">
+                    Province : {{selectedJob.province}}
+                </div>
+                <div class="col-sm-6 jobAppDetails jobAppDetailsSpecial">
+                    Applied : {{selectedJob.appliedOn | date : "MMM-dd, y"}}
+                </div>
+            </div>
+            <ng-template #notAv>
+                N/A
+            </ng-template>
+            <p></p>
+            <div *ngFor="let data of appStatusTrackingData" 
+                class="row">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                        style="width:{{bar2}}%">
-                        <span class="sr-only">70% Complete</span>
+                    <div class="progress-bar {{appStatusTypes[data.appStatus]}}"                         
+                        role="progressbar" 
+                        aria-valuenow="0" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100">
+                        <span>
+                            {{localDataService.getAppStatusInPercentage(data.appStatus)}} @{{data.appStatusChangedOn | date : "MMM-dd, y"}}
+                        </span>                   
                     </div>
                 </div>
+                <p></p>
             </div>
         </div>
         <div class="col-sm-2">

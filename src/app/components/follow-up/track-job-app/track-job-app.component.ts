@@ -17,28 +17,21 @@ export class TrackJobAppComponent implements OnInit {
   myState;
   selectedJob = {
     jobApplicationId: 0,
-    appStatus:0,
+    appStatus: 0,
+    companyName: '',
+    agencyName: '',
+    webURL: '',
+    contactPersonName: '',
+    contactEmail: '',
+    phoneNumber: '',
+    city: '',
+    province: '',
+    appliedOn: null,
+    followUpNotes: ''
   };
 
-  bar1 = 50;
-  bar2 = 70;
-  /*
-    appStatus
-    : 
-    2
-    appStatusChangedOn
-    : 
-    "2023-02-10T06:00:00"
-    appStatusLogId
-    : 
-    1
-    jobApplication
-    : 
-    null
-    jobApplicationId
-    : 
-    1
-  */
+  appStatusTypes: Array<any>;
+
   appStatusTrackingData = [];
 
   constructor(private location: Location,
@@ -57,6 +50,9 @@ export class TrackJobAppComponent implements OnInit {
       this.router.navigate(['/follow-up']);
     else {
       this.selectedJob = this.myState.selectedJob.selectedJob;
+
+      this.appStatusTypes = this.localDataService.getAppStatusTypes();
+      console.log(this.appStatusTypes);
       this.trackJobApp();
     }
   }

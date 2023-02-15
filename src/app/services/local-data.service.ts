@@ -51,6 +51,30 @@ export class LocalDataService {
       return 'purple';
   }
 
+  getAppStatusInPercentage(appStatusType) {
+    // .Applied
+    if (appStatusType === 0)
+      return '25% [Applied]';
+    // .Follow_Up 
+    else if (appStatusType === 1)
+      return '35% [Follow_Up]';
+    // .Client_Response 
+    else if (appStatusType === 2)
+      return '50% [Client_Response]';
+    // .Interview_Setup
+    else if (appStatusType === 3)
+      return '70% [Interview_Setup]';
+    // .Interview_Done 
+    else if (appStatusType === 4)
+      return '80% [Interview_Done]';       
+    // .Final_Result 
+    else if (appStatusType === 5)
+      return '90% [Final_Result]';       
+    // .Closed 
+    else
+      return '100% [Closed]';
+  }
+
   // return country collection
   getCountries(): Array<string> {
     let Countries: string[] = [];
