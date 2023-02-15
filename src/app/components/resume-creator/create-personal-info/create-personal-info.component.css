@@ -1,0 +1,27 @@
+.mainContainer {
+    padding: 20px;
+}
+
+.componentHeader {
+    background-color: #e5c4d3;;
+}
+
+.piHeader {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.formField {
+    padding-bottom: 10px
+}
+
+.saveBtn{
+    text-align: center;
+}
+
+.saveConfirm{
+    color : green;
+    font-weight: bold;
+    font-size: x-large;
+}

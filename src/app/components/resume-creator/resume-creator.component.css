@@ -41,25 +41,6 @@
     height: 300px
 }
 
-.form-control {
-    height: 45px;
-    position: relative
-}
-
-.form-control:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #9a1550
-}
-
-.flight-where-from:after {
-    position: absolute;
-    content: '23';
-    width: 20px;
-    height: 20px;
-    border-radius: 50%
-}
-
 .custom-button {
     height: 45px;
     background-color: #9a1550;

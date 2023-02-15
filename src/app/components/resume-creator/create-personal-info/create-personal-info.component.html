@@ -1,1 +1,140 @@
-<p>create-personal-info works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="piHeader">
+                        <div>
+                            Personal-Info
+                        </div>
+                        <div *ngIf="saved" class="saveConfirm">
+                            Data Saved!
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form *ngIf="personalInfoForm" 
+                        class="form-personalInfo" 
+                        [formGroup]="personalInfoForm"
+                        (ngSubmit)="onSubmit()">
+
+                        <div class="row">
+                            <div class="col-md-1 mx-auto"></div>
+                            <div class="col-md-10 mx-auto">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>First Name</label>
+                                            <input type="text" 
+                                                formControlName="firstName" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
+                                            <div *ngIf="submitted && f['firstName'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['firstName'].errors['required']">
+                                                    First Name is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Last Name</label>
+                                            <input type="text" formControlName="lastName" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
+                                            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['lastName'].errors['required']">
+                                                    Last Name is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div>                               
+                                <div class="row">     
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Email</label>
+                                            <input type="text" formControlName="emailAddress" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['emailAddress'].errors }" />
+                                            <div *ngIf="submitted && f['emailAddress'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['emailAddress'].errors['required']">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="f['emailAddress'].errors['pattern']">
+                                                    Invalid Email
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Phone Number</label>
+                                            <input type="text" 
+                                                formControlName="phoneNumber" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }" />
+
+                                            <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">                                              
+                                                <div *ngIf="f['phoneNumber'].errors['pattern']">
+                                                    Invalid Phone Number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Province</label>
+                                            <select [ngClass]="{ 'is-invalid': submitted && f['province'].errors }"
+                                                (change)="changeProvince($event)" class="form-control"
+                                                formControlName="province">
+                                                <option value="">Choose Province</option>
+                                                <option value={{x}} *ngFor="let x of provinceCollection">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['province'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['province'].errors['required']">
+                                                    Province is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>City</label>
+                                            <select [ngClass]="{ 'is-invalid': submitted && f['city'].errors }"
+                                                class="form-control" formControlName="city">
+                                                <option value="">Choose City</option>
+                                                <option value={{x}} *ngFor="let x of cityCollection">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['city'].errors['required']">
+                                                    City is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                              
+                            </div>
+                            <div class="col-md-1 mx-auto"></div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12 saveBtn">
+                                    <button type="submit" class="btn btn-success">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
