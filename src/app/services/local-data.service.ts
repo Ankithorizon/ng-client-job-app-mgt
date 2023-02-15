@@ -7,6 +7,14 @@ export class LocalDataService {
 
   constructor() { }
 
+  private PersonalInfo;
+  setPersonalInfo(val) {
+    this.PersonalInfo = val;
+  }
+  getPersonalInfo() {
+    return this.PersonalInfo;
+  }
+
   private AppStatusTypes;
   setAppStatusTypes(val) {
     this.AppStatusTypes = val;

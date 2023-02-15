@@ -27,6 +27,11 @@ import { SearchJobAppComponent } from './components/follow-up/search-job-app/sea
 import { JobResumeUploadComponent } from './components/job-resume-upload/job-resume-upload.component';
 import { TrackJobAppComponent } from './components/follow-up/track-job-app/track-job-app.component';
 import { ResumeCreatorComponent } from './components/resume-creator/resume-creator.component';
+import { CreatePersonalInfoComponent } from './components/resume-creator/create-personal-info/create-personal-info.component';
+import { CreateSkillsComponent } from './components/resume-creator/create-skills/create-skills.component';
+import { CreateExperienceComponent } from './components/resume-creator/create-experience/create-experience.component';
+import { CreateEducationComponent } from './components/resume-creator/create-education/create-education.component';
+import { ViewMyResumeComponent } from './components/resume-creator/view-my-resume/view-my-resume.component';
 
 
 // services
@@ -44,6 +49,11 @@ import { ResumeCreatorComponent } from './components/resume-creator/resume-creat
     JobResumeUploadComponent,
     TrackJobAppComponent,
     ResumeCreatorComponent,
+    CreatePersonalInfoComponent,
+    CreateSkillsComponent,
+    CreateExperienceComponent,
+    CreateEducationComponent,
+    ViewMyResumeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,80 @@
-<p>resume-creator works!</p>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div>
+                <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="faq_tab_1-tab" data-bs-toggle="tab"
+                            data-bs-target="#faq_tab_1" type="button" role="tab" aria-controls="faq_tab_1"
+                            aria-selected="true">
+                            <div class="d-flex flex-column lh-lg">
+                                <span>Personal-Info</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_2-tab"
+                            data-bs-toggle="tab" data-bs-target="#faq_tab_2" type="button" role="tab"
+                            aria-controls="faq_tab_2" aria-selected="false">
+                            <div class="d-flex flex-column lh-lg">
+                                <span>Skills</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_3-tab"
+                            data-bs-toggle="tab" data-bs-target="#faq_tab_3" type="button" role="tab"
+                            aria-controls="faq_tab_3" aria-selected="false">
+                            <div class="d-flex flex-column lh-lg">
+                                <span>Work-Experience</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_4-tab"
+                            data-bs-toggle="tab" data-bs-target="#faq_tab_4" type="button" role="tab"
+                            aria-controls="faq_tab_4" aria-selected="false">
+                            <div class="d-flex flex-column lh-lg">
+                                <span>Education</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_4-tab"
+                            data-bs-toggle="tab" data-bs-target="#faq_tab_5" type="button" role="tab"
+                            aria-controls="faq_tab_4" aria-selected="false">
+                            <div class="d-flex flex-column lh-lg">
+                                <span>My-Resume</span>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" 
+                        id="faq_tab_1" role="tabpanel"
+                        aria-labelledby="faq_tab_1-tab">
+                        <div class="container p-3">
+                           <app-create-personal-info></app-create-personal-info>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="faq_tab_2" role="tabpanel" aria-labelledby="faq_tab_2-tab">
+                        <div class="container p-3">
+                            <app-create-skills></app-create-skills>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="faq_tab_3" role="tabpanel" aria-labelledby="faq_tab_3-tab">
+                        <div class="container p-3">
+                            <app-create-experience></app-create-experience>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="faq_tab_4" role="tabpanel" aria-labelledby="faq_tab_4-tab">
+                        <div class="container p-3">
+                            <app-create-education></app-create-education>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="faq_tab_5" role="tabpanel" aria-labelledby="faq_tab_4-tab">
+                        <div class="container p-3">
+                            <app-view-my-resume></app-view-my-resume>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
