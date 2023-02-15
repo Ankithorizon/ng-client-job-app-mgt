@@ -26,6 +26,7 @@ import { AddJobAppComponent } from './components/follow-up/add-job-app/add-job-a
 import { SearchJobAppComponent } from './components/follow-up/search-job-app/search-job-app.component';
 import { JobResumeUploadComponent } from './components/job-resume-upload/job-resume-upload.component';
 import { TrackJobAppComponent } from './components/follow-up/track-job-app/track-job-app.component';
+import { ResumeCreatorComponent } from './components/resume-creator/resume-creator.component';
 
 
 // services
@@ -42,6 +43,7 @@ import { TrackJobAppComponent } from './components/follow-up/track-job-app/track
     SearchJobAppComponent,
     JobResumeUploadComponent,
     TrackJobAppComponent,
+    ResumeCreatorComponent,
   ],
   imports: [
     BrowserModule,
