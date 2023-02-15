@@ -40,34 +40,36 @@
         <div class="col-sm-10">
             <div class="jobAppContainer" *ngFor="let job of jobApps; let i = index">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <button type="button" 
-                            (click)="viewJobApp(job)" 
-                            class="btn infoBtn">
-                            <i class="bi bi-binoculars"></i>
-                        </button>&nbsp;&nbsp;
-                        <button type="button" 
-                            (click)="editJobApp(job)" 
-                            class="btn editBtn">
-                            <i class="bi bi-pencil-fill"></i>
-                        </button>&nbsp;&nbsp;
-                        <button type="button"  
-                            (click)="removeJobApp(mymodal,job)" 
-                            class="btn removeBtn">
-                            <i class="bi bi-calendar-x"></i>
-                        </button>&nbsp;&nbsp;
-                        <button type="button" 
-                            (click)="resumeUpload(job)" 
-                            class="btn uploadBtn">
-                            <i class="bi bi-cloud-arrow-up"></i> Resume
-                        </button>&nbsp;&nbsp;
-                        <button type="button" 
-                            (click)="trackJobApp(job)" 
-                            class="btn btn-outline-secondary">
-                            <i class="bi bi-clock-history"></i> App-Status
-                        </button>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <button type="button" (click)="viewJobApp(job)" class="btn infoBtn">
+                                    <i class="bi bi-binoculars"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-1" *ngIf="job.appStatus!==6">
+                                <button type="button" (click)="editJobApp(job)" class="btn editBtn">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" (click)="removeJobApp(mymodal,job)" class="btn removeBtn">
+                                    <i class="bi bi-calendar-x"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-3" *ngIf="job.appStatus!==6">
+                                <button type="button" (click)="resumeUpload(job)" class="btn uploadBtn">
+                                    <i class="bi bi-cloud-arrow-up"></i> Resume
+                                </button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" (click)="trackJobApp(job)" class="btn btn-outline-secondary">
+                                    <i class="bi bi-clock-history"></i> App-Status
+                                </button>
+                            </div>
+                        </div>    
                     </div>
-                    <div class="col-sm-6 whereApplied">
+                    <div class="col-sm-5 whereApplied">
                         <span 
                             [ngStyle]="{'color': localDataService.getAppStatusTypeColor(job.appStatus)}"
                             *ngIf="appStatusTypes?.length>0">

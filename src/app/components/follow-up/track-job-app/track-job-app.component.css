@@ -24,6 +24,10 @@
     font-weight: bold;
 }
 
+.cancelBtn {
+    float: right;
+}
+
 .Applied{
     width: 25%;
     background-color: maroon;

@@ -4,7 +4,7 @@
         </div>
         <div class="col-sm-8  jobAppContainer">
             <div class="row jobAppHeader">
-                <div class="col-sm-12">
+                <div class="col-sm-10">
                     <span>
                         <u>[TRACK]</u> Job-Application ## {{selectedJob.jobApplicationId}}
                     </span>
@@ -13,6 +13,11 @@
                         *ngIf="localDataService.getAppStatusTypes()?.length>0">
                         [{{localDataService.getAppStatusTypes()[selectedJob.appStatus]}}]
                     </span>
+                </div>
+                <div class="col-sm-2">
+                    <button (click)="goBack()" type="button" class="btn btn-primary cancelBtn">
+                        <i class="bi bi-backspace-fill"></i>
+                    </button>
                 </div>
             </div>
             <p></p>

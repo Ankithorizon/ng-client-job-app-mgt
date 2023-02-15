@@ -69,4 +69,8 @@ export class TrackJobAppComponent implements OnInit {
         }
       );
   }
+  
+  goBack() {
+    this.router.navigate(['/follow-up']);
+  }
 }

@@ -19,8 +19,7 @@ export class ViewJobAppComponent implements OnInit {
     jobApplicationId: 0,
   };
   jobAppData;
-
-  
+ 
    
   constructor(private location: Location,
     private fb: FormBuilder,
@@ -29,8 +28,7 @@ export class ViewJobAppComponent implements OnInit {
     public dataService: DataService,
     private router: Router) {
   }
-
-
+  
   ngOnInit(): void {
     this.myState = this.location.getState();
 
@@ -53,5 +51,10 @@ export class ViewJobAppComponent implements OnInit {
           console.log(error);
         }
     );
+  }
+
+  
+  goBack() {
+    this.router.navigate(['/follow-up']);
   }
 }
