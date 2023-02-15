@@ -7,6 +7,14 @@ export class LocalDataService {
 
   constructor() { }
 
+  private Skills;
+  setSkills(val) {
+    this.Skills = val;
+  }
+  getSkills() {
+    return this.Skills;
+  }
+
   private PersonalInfo;
   setPersonalInfo(val) {
     this.PersonalInfo = val;
