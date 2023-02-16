@@ -7,6 +7,22 @@ export class LocalDataService {
 
   constructor() { }
 
+  private Education;
+  setEducation(val) {
+    this.Education = val;
+  }
+  getEducation() {
+    return this.Education;
+  }
+  
+  private WorkExperience;
+  setWorkExperience(val) {
+    this.WorkExperience = val;
+  }
+  getWorkExperience() {
+    return this.WorkExperience;
+  }
+
   private Skills;
   setSkills(val) {
     this.Skills = val;
@@ -82,10 +98,10 @@ export class LocalDataService {
       return '70% [Interview_Setup]';
     // .Interview_Done 
     else if (appStatusType === 4)
-      return '80% [Interview_Done]';       
+      return '80% [Interview_Done]';
     // .Final_Result 
     else if (appStatusType === 5)
-      return '90% [Final_Result]';       
+      return '90% [Final_Result]';
     // .Closed 
     else
       return '100% [Closed]';
@@ -100,10 +116,10 @@ export class LocalDataService {
     Countries.push("England");
     Countries.push("India");
     return Countries;
-  }  
+  }
 
   // return province collection
-  getProvinces(): Array<string>{
+  getProvinces(): Array<string> {
     let provinces: string[] = [];
     provinces.push("MB");
     provinces.push("ON");

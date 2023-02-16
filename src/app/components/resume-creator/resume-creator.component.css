@@ -1,3 +1,10 @@
+.mainContainer {
+    padding: 20px;
+}
+.componentHeader {
+    background-color: lightyellow;
+}
+
 .nav-tabs .nav-link.active {
     border-color: transparent;
     background-color: #fff !important;

@@ -1,1 +1,174 @@
-<p>create-experience works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="weHeader">
+                        <div>
+                            Work-Experience
+                        </div>
+                        <div *ngIf="saved" class="saveConfirm">
+                            Data Saved!
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form *ngIf="weForm" class="form-we" [formGroup]="weForm" (ngSubmit)="onSubmit()">
+            
+                        <div class="row">
+                            <div class="col-md-1 mx-auto"></div>
+                            <div class="col-md-10 mx-auto">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Province</label>
+                                            <select [ngClass]="{ 'is-invalid': submitted && f['province'].errors }"
+                                                (change)="changeProvince($event)" class="form-control" formControlName="province">
+                                                <option value="">Choose Province</option>
+                                                <option value={{x}} *ngFor="let x of provinces">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['province'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['province'].errors['required']">
+                                                    Province is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && f['province'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['province'].errors['required']">
+                                                Province is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>City</label>
+                                            <select [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" class="form-control"
+                                                formControlName="city">
+                                                <option value="">Choose City</option>
+                                                <option value={{x}} *ngFor="let x of cities">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['city'].errors['required']">
+                                                    City is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['city'].errors['required']">
+                                                City is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Start Date</label>        
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" 
+                                                        [ngClass]="{ 'is-invalid': submitted && f['startDate'].errors }"
+                                                        placeholder="yyyy-mm-dd" 
+                                                        name="dp" 
+                                                        formControlName="startDate" 
+                                                        ngbDatepicker #d="ngbDatepicker">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-outline-secondary" 
+                                                        (click)="d.toggle()" type="button">
+                                                        <i class="bi bi-calendar-day"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>                                          
+                                            <div *ngIf="submitted && hasError('startDate')" 
+                                                class="invalidDate">
+                                                Start Date is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>End Date</label>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" 
+                                                        [ngClass]="{ 'is-invalid': submitted && f['endDate'].errors }"
+                                                        placeholder="yyyy-mm-dd" name="dp1" 
+                                                        formControlName="endDate" 
+                                                        ngbDatepicker #d1="ngbDatepicker">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-outline-secondary" 
+                                                        (click)="d1.toggle()" type="button">
+                                                        <i class="bi bi-calendar-day"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>    
+                                            <div *ngIf="submitted && hasError('endDate')" class="invalidDate">
+                                                End Date is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Employer</label>
+                                            <input type="text" 
+                                                formControlName="employerName" 
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['employerName'].errors }" />
+                                            <div *ngIf="submitted && f['employerName'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['employerName'].errors['required']">
+                                                    Employer is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Job Details</label>
+                                            <textarea 
+                                                class="form-control"
+                                                formControlName="jobDetail" 
+                                                cols="30" 
+                                                rows="3" 
+                                                [ngClass]="{ 'is-invalid': submitted && f['jobDetail'].errors }"
+                                                class="text-area">
+                                            </textarea>                                          
+                                            <div *ngIf="submitted && f['jobDetail'].errors" 
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['jobDetail'].errors['required']">
+                                                    Job Detail is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1 mx-auto"></div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12 saveBtn">
+                                    <button type="button" 
+                                        (click)="onSubmit()" 
+                                        class="btn btn-success">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
