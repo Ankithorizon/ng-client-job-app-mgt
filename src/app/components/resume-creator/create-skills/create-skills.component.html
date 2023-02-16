@@ -14,45 +14,37 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
                             <div class="input-group">
                                 <label class="skillLabel">
                                     Add Skill
                                 </label>
                                 &nbsp;&nbsp;
-                                <input class="form-control" 
-                                    [(ngModel)]="addingSkill" 
-                                    type="text" />
+                                <input class="form-control" [(ngModel)]="addingSkill" type="text" />
                                 &nbsp;&nbsp;
-                                <button 
-                                    (click)="addSkill()"
-                                    type="button" class="btn btn-primary">
+                                <button (click)="addSkill()" type="button" class="btn btn-primary">
                                     <i class="bi bi-plus-circle"></i>
                                 </button>
-                                
+                            
                             </div>
                         </div>
-                        <div class="col-sm-6 skillsContainer">
-                            <h5><u>Skills</u></h5>
-
-                         
-                            <div *ngFor="let skill of skills">
-                                <span class="row">
-                                    <div class="col-sm-8">
-                                        <span>
-                                            {{skill}}                                         
-                                        </span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <button (click)="removeSkill(skill)" 
-                                            type="button" class="btn btn-danger">
-                                            <i class="bi bi-x"></i>
-                                        </button>
-                                    </div>
-                                </span>                             
-                                <br />
-                            </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div class="row">   
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10 skillsContainer">                                                   
+                            <span *ngFor="let skill of skills">
+                                <span>
+                                    {{skill}}
+                                </span>
+                                <span (click)="removeSkill(skill)">
+                                    <i class="bi-file-x" style="font-size: 20px"></i>
+                                </span>
+                                &nbsp;&nbsp;&nbsp;
+                            </span>
                         </div>
+                        <div class="col-sm-1"></div>
                     </div>
                     <p></p>
                     <hr />
