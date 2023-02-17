@@ -119,6 +119,11 @@ export class CreateExperienceComponent implements OnInit {
     });    
     console.log(this.jobDetails);
   }
+
+  isDuplicateEmployer(employerName) {
+    return  this.localDataService.getWorkExperience().findIndex(x => x.employerName === employerName)!==-1;    
+  }
+  
   onSubmit(): void {
     
     this.submitted = true;
@@ -149,8 +154,18 @@ export class CreateExperienceComponent implements OnInit {
       wos = this.localDataService.getWorkExperience() || [];
       if (wos.length < 1)
         wos.push(wo);
-      else
-        wos = [...wos, wo];
+      else {
+        // check for duplicate employer name
+        if (this.isDuplicateEmployer(wo.employerName)) {
+          // replace employer
+          var foundIndex = wos.findIndex(x => x.employerName === wo.employerName);
+          wos[foundIndex] = wo;
+        }
+        else {
+          // add as new employer
+          wos = [...wos, wo];
+        }
+      }
       
       this.workExps = [...wos];
       this.localDataService.setWorkExperience(wos);
