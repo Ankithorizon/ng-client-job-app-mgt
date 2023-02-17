@@ -9,6 +9,7 @@ import { LocalDataService } from '../../../services/local-data.service';
 import { Location } from '@angular/common';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import WorkExperience from '../../../models/workExperience';
+import Validation from '../../../services/Validation';
 
 
 @Component({
@@ -48,7 +49,10 @@ export class CreateExperienceComponent implements OnInit {
       endDate: ['', Validators.required],
       employerName: ['', Validators.required],
       jobDetail: ['', Validators.required],
-    });
+    },
+      {
+        validators: [Validation.match('startDate', 'endDate')]
+      });
     
     this.getProvinces();
   }
@@ -87,6 +91,7 @@ export class CreateExperienceComponent implements OnInit {
       return false;
   }
 
+  
   processDate(date_) {   
     if (date_ === '')
       return false; // 'empty date';
@@ -123,7 +128,7 @@ export class CreateExperienceComponent implements OnInit {
   isDuplicateEmployer(employerName) {
     return  this.localDataService.getWorkExperience().findIndex(x => x.employerName === employerName)!==-1;    
   }
-  
+
   onSubmit(): void {
     
     this.submitted = true;
@@ -238,6 +243,3 @@ export class CreateExperienceComponent implements OnInit {
     this.localDataService.setWorkExperience(this.workExps);    
   }
 }
-
-
-// startdate <= enddate

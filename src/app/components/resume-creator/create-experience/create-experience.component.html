@@ -112,6 +112,11 @@
                                             <div *ngIf="submitted && hasError('endDate')" class="invalidDate">
                                                 End Date is required
                                             </div>
+                                            <div *ngIf="f['endDate'].errors" class="invalidDate">
+                                                <div *ngIf="f['endDate'].errors['matching']">
+                                                    End Date must be >= Start Date
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
