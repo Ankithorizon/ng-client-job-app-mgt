@@ -212,6 +212,9 @@ export class CreateExperienceComponent implements OnInit {
         jobDetails_ = woEdit[0].jobDetails[0];
       }
 
+
+      this.cities = this.localDataService.getCities(woEdit[0].province);
+
       this.weForm.setValue({
         employerName: woEdit[0].employerName,
         city: woEdit[0].city,

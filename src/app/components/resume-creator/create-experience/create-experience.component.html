@@ -22,7 +22,9 @@
                                         <div class="form-group formField">
                                             <label>Province</label>
                                             <select [ngClass]="{ 'is-invalid': submitted && f['province'].errors }"
-                                                (change)="changeProvince($event)" class="form-control" formControlName="province">
+                                                (change)="changeProvince($event)" 
+                                                class="form-control" 
+                                                formControlName="province">
                                                 <option value="">Choose Province</option>
                                                 <option value={{x}} *ngFor="let x of provinces">
                                                     {{x}}
@@ -33,17 +35,14 @@
                                                     Province is required
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div *ngIf="submitted && f['province'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['province'].errors['required']">
-                                                Province is required
-                                            </div>
-                                        </div>
+                                        </div>                                   
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group formField">
                                             <label>City</label>
-                                            <select [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" class="form-control"
+                                            <select 
+                                                [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" 
+                                                class="form-control"
                                                 formControlName="city">
                                                 <option value="">Choose City</option>
                                                 <option value={{x}} *ngFor="let x of cities">
@@ -55,12 +54,7 @@
                                                     City is required
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['city'].errors['required']">
-                                                City is required
-                                            </div>
-                                        </div>
+                                        </div>                                      
                                     </div>
                                 </div>
                                 <div class="row">

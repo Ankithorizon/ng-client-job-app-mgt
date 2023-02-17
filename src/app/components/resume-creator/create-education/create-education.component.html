@@ -1,1 +1,178 @@
-<p>create-education works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="eduHeader">
+                        <div>
+                            Education
+                        </div>
+                        <div *ngIf="saved" class="saveConfirm">
+                            Data Saved!
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form *ngIf="eduForm" class="form-edu" [formGroup]="eduForm" (ngSubmit)="onSubmit()">
+
+                        <div class="row">
+                            <div class="col-md-7 mx-auto">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Degree</label>
+                                            <input type="text" formControlName="degreeName" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['degreeName'].errors }" />
+                                            <div *ngIf="submitted && f['degreeName'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['degreeName'].errors['required']">
+                                                    Degree is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>University</label>
+                                            <input type="text" formControlName="universityName" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['universityName'].errors }" />
+                                            <div *ngIf="submitted && f['universityName'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['universityName'].errors['required']">
+                                                    University is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Major</label>
+                                            <input type="text" 
+                                                formControlName="major" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f['major'].errors }" />
+                                            <div *ngIf="submitted && f['major'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['major'].errors['required']">
+                                                    Major is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Country</label>
+                                            <select [ngClass]="{ 'is-invalid': submitted && f['country'].errors }"
+                                                class="form-control" formControlName="country">
+                                                <option value="">Choose Country</option>
+                                                <option value={{x}} *ngFor="let x of countries">
+                                                    {{x}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['country'].errors['required']">
+                                                    Country is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                 
+                                </div>
+                                <div class="row">
+                                    <!-- startdate-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>Start Date</label>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <input class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['startDate'].errors }"
+                                                        placeholder="yyyy-mm-dd" name="dp" formControlName="startDate"
+                                                        ngbDatepicker #d="ngbDatepicker">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-outline-secondary" (click)="d.toggle()"
+                                                        type="button">
+                                                        <i class="bi bi-calendar-day"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>
+                                            <div *ngIf="submitted && hasError('startDate')" class="invalidDate">
+                                                Start Date is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- enddate-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group formField">
+                                            <label>End Date</label>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <input class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['endDate'].errors }"
+                                                        placeholder="yyyy-mm-dd" name="dp1" formControlName="endDate"
+                                                        ngbDatepicker #d1="ngbDatepicker">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-outline-secondary" (click)="d1.toggle()"
+                                                        type="button">
+                                                        <i class="bi bi-calendar-day"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                            </div>
+                                            <div *ngIf="submitted && hasError('endDate')" class="invalidDate">
+                                                End Date is required
+                                            </div>
+                                            <div *ngIf="f['endDate'].errors" class="invalidDate">
+                                                <div *ngIf="f['endDate'].errors['matching']">
+                                                    End Date must be >= Start Date
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                          
+                            </div>
+                            <div class="col-md-5 mx-auto listOfDegrees">
+                                <div class="degreesDiv">
+                                    <h5><u>Degrees</u></h5>
+                                </div>
+                                <div *ngIf="educations?.length>0">
+                                    <span *ngFor="let edu of educations">
+                                        <span>
+                                            # {{edu.degreeName}}
+                                        </span>
+                                        <span (click)="removeEdu(edu)">
+                                            <i class="bi-file-x" style="font-size: 20px"></i>
+                                        </span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span (click)="editEdu(edu)">
+                                            <i class="bi bi-pencil-fill" 
+                                                style="font-size: 20px"></i>
+                                        </span>
+                                        <br />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12 saveBtn">
+                                    <button type="button" 
+                                        (click)="onSubmit()" class="btn btn-success">
+                                        Save
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button type="button" 
+                                        (click)="reset()" class="btn btn-info">
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
