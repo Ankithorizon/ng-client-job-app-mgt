@@ -15,9 +15,8 @@
                 <div class="card-body">
                     <form *ngIf="weForm" class="form-we" [formGroup]="weForm" (ngSubmit)="onSubmit()">
             
-                        <div class="row">
-                            <div class="col-md-1 mx-auto"></div>
-                            <div class="col-md-10 mx-auto">
+                        <div class="row">                            
+                            <div class="col-md-7 mx-auto">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group formField">
@@ -137,7 +136,7 @@
                                             <textarea 
                                                 class="form-control"
                                                 formControlName="jobDetail" 
-                                                cols="30" 
+                                                cols="25" 
                                                 rows="3" 
                                                 [ngClass]="{ 'is-invalid': submitted && f['jobDetail'].errors }"
                                                 class="text-area">
@@ -152,7 +151,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1 mx-auto"></div>
+                            <div class="col-md-5 mx-auto listOfEmployers">
+                                <div class="employersDiv">
+                                    <h5><u>Employers</u></h5>
+                                </div>
+                                <div *ngIf="workExps?.length>0">
+                                    <span *ngFor="let wo of workExps">
+                                        <span>
+                                            # {{wo.employerName}}
+                                        </span>
+                                        <span (click)="removeWo(wo)">
+                                            <i class="bi-file-x" style="font-size: 20px"></i>
+                                        </span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span (click)="editWo(wo)">
+                                            <i class="bi bi-pencil-fill" style="font-size: 20px"></i>
+                                        </span>
+                                        <br />
+                                    </span>                                
+                                </div>
+                            </div>
+                        
                         </div>
                         <hr />
                         <div class="form-group">

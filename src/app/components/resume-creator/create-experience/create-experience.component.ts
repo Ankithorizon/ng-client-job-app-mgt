@@ -24,6 +24,7 @@ export class CreateExperienceComponent implements OnInit {
   cities = [];
   provinces = [];
   jobDetails = [];
+  workExps = [];
 
   // form
   weForm: FormGroup;
@@ -145,8 +146,13 @@ export class CreateExperienceComponent implements OnInit {
 
       // save to local-data-service
       var wos = [];
-      wos = this.localDataService.getWorkExperience();
-      wos = [...wos, wo];
+      wos = this.localDataService.getWorkExperience() || [];
+      if (wos.length < 1)
+        wos.push(wo);
+      else
+        wos = [...wos, wo];
+      
+      this.workExps = [...wos];
       this.localDataService.setWorkExperience(wos);
       console.log(this.localDataService.getWorkExperience());
 
@@ -154,7 +160,7 @@ export class CreateExperienceComponent implements OnInit {
     
       setTimeout(() => {
         this.reset();
-      }, 3000);     
+      }, 1500);     
     }
   }
 
@@ -162,6 +168,59 @@ export class CreateExperienceComponent implements OnInit {
     this.weForm.reset();
     this.submitted = false;
     this.saved = false;
+  }
+
+
+  // edit wo
+  editWo(wo) {
+    var woEdit = this.localDataService.getWorkExperience().filter(function (obj) {
+      return obj.employerName === wo.employerName;
+    });
+
+    // load selected wo object in form
+    if (woEdit !== null && woEdit.length === 1) {
+
+      var jobDetails_ = '';
+
+      if (woEdit[0].jobDetails !== null && woEdit[0].jobDetails.length > 1) {
+        woEdit[0].jobDetails.forEach(function (element) {
+          console.log(element);
+          jobDetails_ += element + "\n";
+        });
+      }
+      else {
+        jobDetails_ = woEdit[0].jobDetails[0];
+      }
+
+      this.weForm.setValue({
+        employerName: woEdit[0].employerName,
+        city: woEdit[0].city,
+        province: woEdit[0].province,
+        jobDetail: jobDetails_,
+        startDate: {
+          year: woEdit[0].startDate.getFullYear(),
+          month: woEdit[0].startDate.getMonth() + 1,
+          day: woEdit[0].startDate.getDate()
+        },
+        endDate: {
+          year: woEdit[0].endDate.getFullYear(),
+          month: woEdit[0].endDate.getMonth() + 1,
+          day: woEdit[0].endDate.getDate()
+        }
+      });
+
+      
+    }
+    else
+      return;
+  }
+
+  // remove wo
+  removeWo(wo) {
+    this.workExps = this.localDataService.getWorkExperience().filter(function (obj) {
+      return obj.employerName !== wo.employerName;
+    });
+    this.localDataService.setWorkExperience(this.workExps);    
   }
 }
 
