@@ -1,1 +1,68 @@
-<p>view-my-resume works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="myResumeHeader">
+                        <div>
+                            Your Resume 
+                        </div>                   
+                    </div>
+                </div>
+                <div class="card-body">                 
+                    <div class="form-group">
+                        <div class="row resumeBtnContainer">
+                            <div class="col-sm-4">
+                                <button type="button" 
+                                    (click)="previewResume()" 
+                                    class="btn btn-outline-dark resumeBtn">
+                                    Preview Resume
+                                </button>
+                            </div>
+                            <div class="col-sm-4 downloadResume">
+                                <button type="button"
+                                    (click)="createAndDownloadResume()" 
+                                    class="btn btn-primary resumeBtn">
+                                    Download Resume
+                                </button>                              
+                            </div>
+                            <div class="col-sm-4 emailResume">
+                                <button type="button" 
+                                    (click)="createAndEmailResume()" 
+                                    class="btn btn-success resumeBtn ">
+                                    Email Resume
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="error" *ngIf="error">
+                        {{error}}
+                    </div>
+
+                    <div *ngIf="previewResumeFlag">
+                        <hr />
+                        <div class="container">
+                            <div class="personalInfo">
+                                <div class="titleHeader"><u>Personal-Info</u></div>
+                            </div>
+                            <hr />
+                            <div class="skills">
+                                <div class="titleHeader"><u>Technical-Skills</u></div>
+                            </div>
+                            <hr />
+                            <div class="wo">
+                                <div class="titleHeader"><u>Work-Experience</u></div>
+                            </div>
+                            <hr />
+                            <div class="education">
+                                <div class="titleHeader"><u>Education</u></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

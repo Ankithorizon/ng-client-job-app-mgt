@@ -25,7 +25,8 @@ export class ViewMyResumeComponent implements OnInit {
   personalInfo = new PersonalInfo();
   skills = [];
 
-
+  previewResumeFlag = false;
+  error = '';
 
   
   constructor(private location: Location,
@@ -37,13 +38,28 @@ export class ViewMyResumeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log('init');
     this.personalInfo = this.localDataService.getPersonalInfo();
     this.skills = this.localDataService.getSkills();
     this.workExperience = this.localDataService.getWorkExperience();
     this.education = this.localDataService.getEducation();
 
     console.log(this.personalInfo, this.skills, this.workExperience, this.education);
+  }
+
+  createAndDownloadResume() {
+    
+  }
+  createAndEmailResume() {
+    
+  }
+  previewResume() {    
+
+    if (this.localDataService.isErrorBeforePreview(this.personalInfo, this.skills, this.workExperience, this.education)) {
+      this.previewResumeFlag = false;
+      this.error = "Information is Incomplete!";
+    }
+    else {
+      this.previewResumeFlag = true;
+    }
   }
 }

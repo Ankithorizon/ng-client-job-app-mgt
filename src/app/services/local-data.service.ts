@@ -14,7 +14,7 @@ export class LocalDataService {
   getEducation() {
     return this.Education;
   }
-  
+
   private WorkExperience;
   setWorkExperience(val) {
     this.WorkExperience = val;
@@ -170,5 +170,13 @@ export class LocalDataService {
       errors.push('[' + componentName + '] Data Not Found ! / Bad Request !');
     }
     return errors;
+  }
+
+  // check before resume preview 
+  isErrorBeforePreview(personalInfo, skills, workExperience, education){
+    if (personalInfo === null || personalInfo === undefined || skills === null || skills === undefined || workExperience === null || workExperience === undefined || education === null || education === undefined)
+      return true;
+    else
+      return false;
   }
 }

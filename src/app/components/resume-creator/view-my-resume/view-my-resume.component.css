@@ -1,0 +1,40 @@
+.mainContainer {
+    padding: 20px;
+}
+
+.componentHeader {
+    background-color: #e5c4d3;
+}
+
+.myResumeHeader {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.resumeBtnContainer{
+    padding: 20px;
+}
+.emailResume {
+    text-align: right;    
+}
+.downloadResume {
+    text-align: center;
+}
+.resumeBtn{
+    color: black;
+    background-color: bisque;
+    font-weight: bold;
+}
+.titleHeader{
+    color: #e5c4d3;
+    font-weight: bold;
+    font-size: x-large;      
+    padding: 10px;  
+}
+.error{
+    color: red;
+    font-weight: bold;
+    font-size: x-large;
+    padding: 30px;
+}
