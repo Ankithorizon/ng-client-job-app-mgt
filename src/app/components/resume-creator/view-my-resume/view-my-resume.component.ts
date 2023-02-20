@@ -12,6 +12,9 @@ import WorkExperience from '../../../models/workExperience';
 import Education from '../../../models/education';
 import PersonalInfo from '../../../models/personalInfo';
 
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
 
 @Component({
   selector: 'app-view-my-resume',
@@ -50,12 +53,92 @@ export class ViewMyResumeComponent implements OnInit {
     console.log(this.personalInfo, this.skills, this.workExperience, this.education);
   }
 
+  prepareDataForResumeService() {
+    var dataValid = false;
+    
+    // format work-experience's startDate/endDate
+    var woExps = this.workExperience;
+    woExps.forEach((woe) => {
+      var startDate_ = monthNames[new Date(woe.startDate).getMonth()] + ', ' + new Date(woe.startDate).getFullYear();
+      woe.startDate = startDate_;
+
+      if (woe.tillDate) {
+        woe.endDate = 'Till - Date';
+      }
+      else {
+        var endDate_ = monthNames[new Date(woe.endDate).getMonth()] + ', ' + new Date(woe.endDate).getFullYear();
+        woe.endDate = endDate_;
+      }
+    });
+    
+    
+    // format education's startDate/endDate
+    var edus = this.education;
+    edus.forEach((edu) => {
+      var startDate_ = monthNames[new Date(edu.startDate).getMonth()] + ', ' + new Date(edu.startDate).getFullYear();
+      edu.startDate = startDate_;
+
+      var endDate_ = monthNames[new Date(edu.endDate).getMonth()] + ', ' + new Date(edu.endDate).getFullYear();
+      edu.endDate = endDate_;
+    });
+    
+
+    var myResume = {};
+    myResume = {
+      personalInfo: this.personalInfo,
+      skills: this.skills,
+      workExperience: woExps,
+      education: edus
+    };
+    console.log(myResume);
+    dataValid = true;
+    
+    if (dataValid)
+      return myResume;
+    else
+      return null;
+  }
   createAndDownloadResume() {
     
+    this.error = '';
+
+    var myResume = this.prepareDataForResumeService();
+    if (myResume != null) {
+      // api call      
+      this.dataService.createAndDownloadResume(myResume)
+        .subscribe(
+          blob => {
+            console.log(blob);
+
+            // const myFile = new Blob([blob], { type: 'text/csv' });            
+            const myFile = new Blob([blob], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(myFile);
+            window.open(url);
+            
+            // redirect to resume-creator component, so 
+            // all service variables get reset            
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          },
+          error => {            
+            console.log(error);
+          }
+        );
+    }
+    else {
+      this.error = 'Resume Data Not Found!';
+      /*
+      setTimeout(() => {
+        this.error = '';
+      }, 3000);
+      */
+    }
   }
-  createAndEmailResume() {
-    
+
+  createAndEmailResume() {    
   }
+
   previewResume() {   
     this.getResumeData();
 

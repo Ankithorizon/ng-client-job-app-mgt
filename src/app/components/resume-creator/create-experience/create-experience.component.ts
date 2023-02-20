@@ -18,7 +18,6 @@ import Validation from '../../../services/Validation';
   styleUrls: ['./create-experience.component.css']
 })
 export class CreateExperienceComponent implements OnInit {
-
   
   saved = false;
 
@@ -40,7 +39,7 @@ export class CreateExperienceComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter) {        
   }
-
+ 
   ngOnInit(): void {
     this.weForm = this.fb.group({
       city: ['', Validators.required],
@@ -49,6 +48,7 @@ export class CreateExperienceComponent implements OnInit {
       endDate: ['', Validators.required],
       employerName: ['', Validators.required],
       jobDetail: ['', Validators.required],
+      tillDate: [false],
     },
       {
         validators: [Validation.match('startDate', 'endDate')]
@@ -129,6 +129,13 @@ export class CreateExperienceComponent implements OnInit {
     return  this.localDataService.getWorkExperience().findIndex(x => x.employerName === employerName)!==-1;    
   }
 
+  onCheckboxChange(event: any) {
+    console.log(event.target.checked);
+    if (event.target.checked) {
+    } else {
+    }
+  }
+
   onSubmit(): void {
     
     this.submitted = true;
@@ -151,6 +158,7 @@ export class CreateExperienceComponent implements OnInit {
         city: this.weForm.controls['city'].value,
         startDate: new Date(this.weForm.controls['startDate'].value.year + "/" + this.weForm.controls['startDate'].value.month + "/" + this.weForm.controls['startDate'].value.day),
         endDate: new Date(this.weForm.controls['endDate'].value.year + "/" + this.weForm.controls['endDate'].value.month + "/" + this.weForm.controls['endDate'].value.day),
+        tillDate: this.weForm.controls['tillDate'].value       
       };
 
 
@@ -216,6 +224,7 @@ export class CreateExperienceComponent implements OnInit {
       this.cities = this.localDataService.getCities(woEdit[0].province);
 
       this.weForm.setValue({
+        tillDate: woEdit[0].tillDate,
         employerName: woEdit[0].employerName,
         city: woEdit[0].city,
         province: woEdit[0].province,
@@ -231,8 +240,6 @@ export class CreateExperienceComponent implements OnInit {
           day: woEdit[0].endDate.getDate()
         }
       });
-
-      
     }
     else
       return;

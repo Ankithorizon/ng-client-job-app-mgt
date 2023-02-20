@@ -87,6 +87,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group formField">
                                             <label>End Date</label>
+                                            &nbsp;&nbsp;
+                                            <span>
+                                                <input type="checkbox"                                                     
+                                                    formControlName="tillDate" 
+                                                    (change)="onCheckboxChange($event)" />
+                                                    <b>&nbsp;&nbsp;Till Date</b>
+                                            </span>
                                             <div class="row">
                                                 <div class="col-sm-9">
                                                     <input class="form-control" 

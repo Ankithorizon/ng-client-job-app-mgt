@@ -87,7 +87,12 @@
                                         <span>
                                             From : {{wo.startDate | date : "MMM-dd, y"}}, 
                                             &nbsp;&nbsp; 
-                                            To : {{wo.endDate | date : "MMM-dd, y"}}
+                                            <span *ngIf="wo.tillDate; else displayEndDate">
+                                                To : Till - Date
+                                            </span>
+                                            <ng-template #displayEndDate>
+                                                To : {{wo.endDate | date : "MMM-dd, y"}}
+                                            </ng-template>                                            
                                         </span>
                                         <br />
                                         <span>
