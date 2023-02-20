@@ -45,22 +45,89 @@
                         <div class="container">
                             <div class="personalInfo">
                                 <div class="titleHeader"><u>Personal-Info</u></div>
+                                <div class="titleDetail">
+                                    <div>
+                                        First Name : {{personalInfo.firstName}}
+                                    </div>
+                                    <div>
+                                        Last Name : {{personalInfo.lastName}}
+                                    </div>
+                                    <div>
+                                        Email : {{personalInfo.emailAddress}}
+                                    </div>
+                                    <div>
+                                        Phone : {{personalInfo.phoneNumber}}
+                                    </div>
+                                    <div>
+                                        Location : {{personalInfo.city}}, {{personalInfo.province}}
+                                    </div>
+                                </div>
                             </div>
                             <hr />
                             <div class="skills">
                                 <div class="titleHeader"><u>Technical-Skills</u></div>
+                                <div class="titleDetail">
+                                    <span *ngFor="let skill of skills;">
+                                        <span>
+                                            - {{skill}}
+                                        </span>
+                                        <br />
+                                    </span>
+                                </div>
                             </div>
                             <hr />
                             <div class="wo">
                                 <div class="titleHeader"><u>Work-Experience</u></div>
+                                <div class="titleDetail">
+                                    <div *ngFor="let wo of workExperience">
+                                        <span>
+                                            Employer : {{wo.employerName}} [ {{wo.city}}, {{wo.province}} ]
+                                        </span>
+                                        <br />
+                                        <span>
+                                            From : {{wo.startDate | date : "MMM-dd, y"}}, 
+                                            &nbsp;&nbsp; 
+                                            To : {{wo.endDate | date : "MMM-dd, y"}}
+                                        </span>
+                                        <br />
+                                        <span>
+                                            Job Details : 
+                                            <br />
+                                            <span 
+                                                class="jobDetails"
+                                                *ngFor="let job of wo.jobDetails">
+                                                {{job}}
+                                                <br />
+                                            </span>                                                
+                                        </span>
+                                        <p></p>
+                                    </div>
+                                </div>
                             </div>
                             <hr />
                             <div class="education">
                                 <div class="titleHeader"><u>Education</u></div>
+                                <div class="titleDetail">
+                                    <div *ngFor="let edu of education">
+                                        <span>
+                                            Degree : {{edu.degreeName}} [{{edu.major}}]                                          
+                                        </span>
+                                        <br />
+                                        <span>
+                                            From : {{edu.startDate | date : "MMM-dd, y"}},
+                                            &nbsp;&nbsp;
+                                            To : {{edu.endDate | date : "MMM-dd, y"}}
+                                        </span>
+                                        <br />
+                                        <span>
+                                            University : {{edu.universityName}}, {{edu.country}}
+                                        </span>    
+                                        <p></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

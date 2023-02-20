@@ -1,0 +1,24 @@
+  <div class="titleDetail">
+                                    <div>
+                                        First Name : {{personalInfo.firstName}}
+                                    </div> 
+                                    <div>
+                                        Last Name : {{personalInfo.lastName}}
+                                    </div>
+                                    <div>
+                                        Email : {{personalInfo.emailAddress}}
+                                    </div>
+                                    <div>
+                                        Phone : {{personalInfo.phoneNumber}}
+                                    </div>
+                                    <div>
+                                        Location : {{personalInfo.city}}, {{personalInfo.province}}
+                                    </div>
+                                </div>    
+
+   <span *ngFor="let skill of skills;">
+                                        <span>
+                                            - {{skill}}
+                                        </span>
+                                        <br />
+                                    </span>     

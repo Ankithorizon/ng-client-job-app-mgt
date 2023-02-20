@@ -20,8 +20,8 @@ import PersonalInfo from '../../../models/personalInfo';
 })
 export class ViewMyResumeComponent implements OnInit {
 
-  workExperience = new WorkExperience();
-  education = new Education();
+  workExperience = [];
+  education = [];
   personalInfo = new PersonalInfo();
   skills = [];
 
@@ -38,6 +38,10 @@ export class ViewMyResumeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
+  }
+
+  getResumeData() {
     this.personalInfo = this.localDataService.getPersonalInfo();
     this.skills = this.localDataService.getSkills();
     this.workExperience = this.localDataService.getWorkExperience();
@@ -52,8 +56,11 @@ export class ViewMyResumeComponent implements OnInit {
   createAndEmailResume() {
     
   }
-  previewResume() {    
+  previewResume() {   
+    this.getResumeData();
 
+    this.previewResumeFlag = true;
+    /*
     if (this.localDataService.isErrorBeforePreview(this.personalInfo, this.skills, this.workExperience, this.education)) {
       this.previewResumeFlag = false;
       this.error = "Information is Incomplete!";
@@ -61,5 +68,7 @@ export class ViewMyResumeComponent implements OnInit {
     else {
       this.previewResumeFlag = true;
     }
+    */
+    
   }
 }

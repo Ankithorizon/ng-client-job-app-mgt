@@ -32,9 +32,16 @@
     font-size: x-large;      
     padding: 10px;  
 }
+.titleDetail{
+    padding: 10px;
+    font-weight: bold;
+}
 .error{
     color: red;
     font-weight: bold;
     font-size: x-large;
     padding: 30px;
+}
+.jobDetails{
+    padding: 20px;
 }
