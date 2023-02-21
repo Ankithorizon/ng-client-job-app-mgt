@@ -93,12 +93,12 @@
                         </div>
                         <div class="jobAppDetails">
                             Phone : 
-                            <span *ngIf="job.phoneNumber">
+                            <span *ngIf="job.phoneNumber; else NA">
                                 {{job.phoneNumber}}
                             </span>
-                            <span *ngIf="!job.phoneNumber">
+                            <ng-template #NA>
                                 N/A
-                            </span>
+                            </ng-template>
                         </div>
                         <div>
                             <button type="button" 
@@ -119,30 +119,30 @@
                     <div class="col-sm-6">
                         <div class="jobAppDetails">
                             Company :
-                            <span *ngIf="job.companyName">
+                            <span *ngIf="job.companyName; else NA">
                                 {{job.companyName}}
                             </span>
-                            <span *ngIf="!job.companyName">
+                            <ng-template #NA>
                                 N/A
-                            </span>
+                            </ng-template>
                         </div>
                         <div class="jobAppDetails">
                             Agency :
-                            <span *ngIf="job.agencyName">
+                            <span *ngIf="job.agencyName; else NA">
                                 {{job.agencyName}}
                             </span>
-                            <span *ngIf="!job.agencyName">
+                            <ng-template #NA>
                                 N/A
-                            </span>
+                            </ng-template>
                         </div>
                         <div class="jobAppDetails">
                             Company URL :
-                            <span *ngIf="job.webURL">
+                            <span *ngIf="job.webURL; else NA">
                                 {{job.webURL}}
                             </span>
-                            <span *ngIf="!job.webURL">
+                            <ng-template #NA>
                                 N/A
-                            </span>
+                            </ng-template>
                         </div>
                         <div class="jobAppDetails">
                             <div class="accordion" 
@@ -168,9 +168,14 @@
                                         class="accordion-collapse collapse" 
                                         aria-labelledby="headingOne"
                                         data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
+                                        <div *ngIf="job.followUpNotes; else NA" class="accordion-body">
                                             {{job.followUpNotes}}
                                         </div>
+                                        <ng-template #NA>
+                                            <div class="accordion-body">
+                                                N/A
+                                            </div>
+                                        </ng-template>
                                     </div>
                                 </div>                             
                             </div>

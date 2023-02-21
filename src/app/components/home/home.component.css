@@ -2,6 +2,12 @@
     padding: 20px;
 }
 
+.techDiv{
+    color: green;
+    font-size: large;
+    font-weight: bold;
+}
+
 .homePageHeader {
     text-align: center;
     vertical-align: middle;
