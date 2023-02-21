@@ -18,9 +18,8 @@
                         [formGroup]="personalInfoForm"
                         (ngSubmit)="onSubmit()">
 
-                        <div class="row">
-                            <div class="col-md-1 mx-auto"></div>
-                            <div class="col-md-10 mx-auto">
+                        <div class="row">                            
+                            <div class="col-md-7 mx-auto">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group formField">
@@ -120,7 +119,32 @@
                                     </div>
                                 </div>                              
                             </div>
-                            <div class="col-md-1 mx-auto"></div>
+                            <div class="col-md-5 mx-auto pinfoEdit">
+                                <div *ngIf="personalInfo">    
+                                    <span>
+                                        {{personalInfo.firstName}}, {{personalInfo.lastName}}
+                                    </span>
+                                    <br />
+                                    <span>
+                                        {{personalInfo.emailAddress}}
+                                    </span>                                    
+                                    <span *ngIf="personalInfo.phoneNumber">
+                                        <br />
+                                        {{personalInfo.phoneNumber}}
+                                    </span>
+                                    <br />
+                                    <span>
+                                        {{personalInfo.city}}, {{personalInfo.province}}
+                                    </span>
+
+                                    <p></p>
+                                    <button type="button" (click)="editPersonalInfo(personalInfo)" class="btn btn-outline-secondary">
+                                        Edit Personal-Info
+                                        &nbsp;&nbsp;
+                                        <i class="bi bi-pencil-fill" style="font-size: 20px"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <hr />
                         <div class="form-group">

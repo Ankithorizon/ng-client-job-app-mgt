@@ -25,3 +25,12 @@
     font-weight: bold;
     font-size: x-large;
 }
+
+.pinfoEdit {
+    margin-left: 30px;
+    padding-left: 10px;
+    background-color: lightgoldenrodyellow;
+    color: black;
+    font-style: italic;
+    font-weight: bold;
+}

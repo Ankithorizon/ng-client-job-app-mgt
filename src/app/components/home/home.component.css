@@ -1,3 +1,30 @@
 .mainContainer { 
     padding: 20px;
 }
+
+.homePageHeader {
+    text-align: center;
+    vertical-align: middle;
+    color: blue;
+    background-color: lightyellow;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: 2px solid red;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.titleHeader {
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: 2px solid green;
+    border-radius: 10px;
+    background-color: lightskyblue;
+}
+
+.titleBody {
+    font-size: medium;
+    line-height: 0.25in;
+}

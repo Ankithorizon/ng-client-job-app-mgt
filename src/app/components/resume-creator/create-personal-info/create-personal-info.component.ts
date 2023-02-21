@@ -24,7 +24,7 @@ export class CreatePersonalInfoComponent {
   cityCollection: string[] = [];
   
   submitted = false;
-  personalInfo = new PersonalInfo();
+  personalInfo;
 
   saved = false;
 
@@ -86,6 +86,7 @@ export class CreatePersonalInfoComponent {
     };
 
     // save to local-data-service
+    this.personalInfo = new PersonalInfo(); 
     this.personalInfo = personalInfoData;
     this.localDataService.setPersonalInfo(this.personalInfo);
 
@@ -100,5 +101,26 @@ export class CreatePersonalInfoComponent {
     this.saved = false;
     this.personalInfoForm.reset();
     this.submitted = false;
+  }
+
+  // edit personal-info
+  editPersonalInfo(personalInfo) {  
+
+    // load personal-info in form
+    if (personalInfo !== null && personalInfo !== undefined) {   
+
+      this.cityCollection = this.localDataService.getCities(personalInfo.province);
+
+      this.personalInfoForm.setValue({
+        firstName: personalInfo.firstName,
+        lastName: personalInfo.lastName,
+        emailAddress: personalInfo.emailAddress,
+        phoneNumber: personalInfo.phoneNumber,
+        province: personalInfo.province,
+        city: personalInfo.city
+      });
+    }
+    else
+      return;
   }
 }
