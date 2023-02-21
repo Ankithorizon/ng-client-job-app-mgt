@@ -30,6 +30,7 @@ export class ViewMyResumeComponent implements OnInit {
 
   previewResumeFlag = false;
   error = '';
+  successApiMessage = '';
 
   
   constructor(private location: Location,
@@ -40,8 +41,7 @@ export class ViewMyResumeComponent implements OnInit {
     public formatter: NgbDateParserFormatter) {
   }
 
-  ngOnInit(): void {
-  
+  ngOnInit(): void {  
   }
 
   getResumeData() {
@@ -101,6 +101,7 @@ export class ViewMyResumeComponent implements OnInit {
   createAndDownloadResume() {
     
     this.error = '';
+    this.successApiMessage = '';
 
     this.getResumeData();
 
@@ -150,12 +151,11 @@ export class ViewMyResumeComponent implements OnInit {
     else {
       this.error = 'Resume Data Not Found!';    
     }
-  }
-
-  
+  } 
 
   previewResume() {   
     this.error = '';
+    this.successApiMessage = '';
     
     this.getResumeData();
 
@@ -168,6 +168,54 @@ export class ViewMyResumeComponent implements OnInit {
     } 
   }
 
-  createAndEmailResume() {    
+  createAndEmailResume() {
+    this.error = '';
+    this.successApiMessage = '';
+
+    this.getResumeData();
+
+    var myResume = this.prepareDataForResumeService();
+
+    // check for 400, 500    
+    /*
+    var myResume = {};
+    myResume = {
+      personalInfo: this.personalInfo,
+      skills: this.skills,
+      // workExperience: this.workExperience,
+      education: this.education
+    };
+    console.log(myResume);
+    */
+    
+    if (myResume != null) {
+      // api call
+      this.dataService.createAndEmailResume(myResume)
+        .subscribe(
+          json => {
+            console.log(json);
+            this.successApiMessage = json;
+
+            // redirect to resume-creator component, so 
+            // all service variables get reset   
+            setTimeout(() => {
+              this.successApiMessage = '';
+              window.location.reload();
+            }, 3000);
+          },
+          error => {
+            console.log(error);
+            if (error.status === 400)
+              this.error = 'Bad Request !';
+            else if (error.status === 500)
+              this.error = 'Server Error !';
+            else
+              this.error = 'Error !';
+          }
+        );
+    }
+    else {
+      this.error = 'Resume Data Not Found!';
+    }
   }
 }
