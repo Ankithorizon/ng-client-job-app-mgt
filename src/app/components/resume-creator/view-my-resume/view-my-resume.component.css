@@ -12,6 +12,17 @@
     font-weight: bold;
 }
 
+.previewResume{
+    text-align: center;
+    vertical-align: middle;
+    color: blue;
+    background-color: lightyellow;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 2px solid red;
+    border-radius: 20px;
+    font-weight: bold;
+}
 .resumeBtnContainer{
     padding: 20px;
 }
@@ -27,9 +38,9 @@
     font-weight: bold;
 }
 .titleHeader{
-    color: #e5c4d3;
+    color: blue;
     font-weight: bold;
-    font-size: x-large;      
+    font-size: large;      
     padding: 10px;  
 }
 .titleDetail{
@@ -41,6 +52,7 @@
     font-weight: bold;
     font-size: x-large;
     padding: 30px;
+    text-align: center;
 }
 .jobDetails{
     padding: 20px;

@@ -53,10 +53,14 @@ export class ViewMyResumeComponent implements OnInit {
     console.log(this.personalInfo, this.skills, this.workExperience, this.education);
   }
 
+
   prepareDataForResumeService() {
-    var dataValid = false;
+
+    if (this.localDataService.isObjectNullORUndefinedOREmpty(this.personalInfo, this.skills, this.workExperience, this.education)) {      
+      return null;
+    }
     
-    // format work-experience's startDate/endDate
+    // format work-experience's startDate/endDate    
     var woExps = this.workExperience;
     woExps.forEach((woe) => {
       var startDate_ = monthNames[new Date(woe.startDate).getMonth()] + ', ' + new Date(woe.startDate).getFullYear();
@@ -91,18 +95,29 @@ export class ViewMyResumeComponent implements OnInit {
       education: edus
     };
     console.log(myResume);
-    dataValid = true;
     
-    if (dataValid)
-      return myResume;
-    else
-      return null;
+    return myResume;
   }
   createAndDownloadResume() {
     
     this.error = '';
 
+    this.getResumeData();
+
     var myResume = this.prepareDataForResumeService();
+
+    // check for 400, 500    
+    /*
+    var myResume = {};
+    myResume = {
+      personalInfo: this.personalInfo,
+      skills: this.skills,
+      // workExperience: this.workExperience,
+      education: this.education
+    };
+    console.log(myResume);
+    */
+    
     if (myResume != null) {
       // api call      
       this.dataService.createAndDownloadResume(myResume)
@@ -116,42 +131,43 @@ export class ViewMyResumeComponent implements OnInit {
             window.open(url);
             
             // redirect to resume-creator component, so 
-            // all service variables get reset            
+            // all service variables get reset    
             setTimeout(() => {
               window.location.reload();
             }, 3000);
           },
           error => {            
             console.log(error);
+            if (error.status === 400)
+              this.error = 'Bad Request !';
+            else if (error.status === 500)
+              this.error = 'Server Error !';
+            else
+              this.error = 'Error !';              
           }
         );
     }
     else {
-      this.error = 'Resume Data Not Found!';
-      /*
-      setTimeout(() => {
-        this.error = '';
-      }, 3000);
-      */
+      this.error = 'Resume Data Not Found!';    
     }
   }
 
-  createAndEmailResume() {    
-  }
+  
 
   previewResume() {   
+    this.error = '';
+    
     this.getResumeData();
 
-    this.previewResumeFlag = true;
-    /*
-    if (this.localDataService.isErrorBeforePreview(this.personalInfo, this.skills, this.workExperience, this.education)) {
+    if (this.localDataService.isObjectNullORUndefinedOREmpty(this.personalInfo, this.skills, this.workExperience, this.education)) {
       this.previewResumeFlag = false;
       this.error = "Information is Incomplete!";
     }
     else {
       this.previewResumeFlag = true;
-    }
-    */
-    
+    } 
+  }
+
+  createAndEmailResume() {    
   }
 }

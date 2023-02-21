@@ -172,9 +172,9 @@ export class LocalDataService {
     return errors;
   }
 
-  // check before resume preview 
-  isErrorBeforePreview(personalInfo, skills, workExperience, education){
-    if (personalInfo === null || personalInfo === undefined || skills === null || skills === undefined || workExperience === null || workExperience === undefined || education === null || education === undefined)
+  // check 
+  isObjectNullORUndefinedOREmpty(personalInfo, skills, workExperience, education){
+    if (personalInfo === null || personalInfo === undefined || skills === null || skills === undefined || workExperience === null || workExperience === undefined || education === null || education === undefined || education.length<1 || skills.length<1 || workExperience.length<1)
       return true;
     else
       return false;
