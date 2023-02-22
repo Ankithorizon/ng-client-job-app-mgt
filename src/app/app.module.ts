@@ -38,6 +38,10 @@ import { UserResumeEmailDataComponent } from './components/view-user-data/user-r
 
 
 // services
+import { DataService } from './services/data.service';
+import { ToastService } from './services/toast.service';
+import { LocalDataService } from './services/local-data.service';
+
 
 @NgModule({
   declarations: [
@@ -77,7 +81,7 @@ import { UserResumeEmailDataComponent } from './components/view-user-data/user-r
       progressBar: true,
     }),
   ],
-  providers: [],
+  providers: [LocalDataService, DataService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
