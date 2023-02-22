@@ -9,7 +9,9 @@
     border-color: transparent;
     background-color: #fff !important;
     color: #9a1550 !important;
-    border-bottom: 4px solid #9a1550 !important
+    border-bottom: 4px solid #9a1550 !important;
+
+    font-size: large;
 }
 
 .nav-fill .nav-item .nav-link,

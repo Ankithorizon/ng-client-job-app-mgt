@@ -1,1 +1,94 @@
-<p>user-resume-email-data works!</p>
+<div class="container mainContainer">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="resumeHeader">
+                        <div>
+                            Resume-Downloaded
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <div *ngIf="userData?.length>0; else noUserData" class="container">
+                                <div class="form-group">
+                                    <input type="text" class="searchControl form-control" placeholder="Search!!!"
+                                        [(ngModel)]="term">
+                                </div>
+                                <p></p>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Emailed At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let p of userData  
+                                                | filter:term 
+                                                | paginate
+                                                                : {
+                                                                    itemsPerPage: tableSize,
+                                                                    currentPage: page,
+                                                                    totalItems: count
+                                                                };
+                                                                let i = index">
+                                            <td scope="row">{{ p.userResumeEmailId }}</td>
+                                            <td>
+                                                <span *ngIf="p.firstName; else NA">
+                                                    {{ p.firstName }}
+                                                </span>
+                                                <ng-template #NA>
+                                                    N/A
+                                                </ng-template>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="p.lastName; else NA">
+                                                    {{ p.lastName }}
+                                                </span>
+                                                <ng-template #NA>
+                                                    N/A
+                                                </ng-template>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{p.userEmail}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{ p.resumeEmailedAt | date : "MMM-dd, y" }}
+                                                </span>
+                                                <br />
+                                                <span>
+                                                    {{ p.resumeEmailedAt | date : "hh:mm a" }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center">
+                                    <pagination-controls previousLabel="Prev" nextLabel="Next"
+                                        (pageChange)="onTableDataChange($event)">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                            <ng-template #noUserData>
+                                <div class="container">
+                                    <span class="noUserDate">
+                                        User-Data Not Found !
+                                    </span>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

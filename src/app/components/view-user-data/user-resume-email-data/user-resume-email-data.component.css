@@ -1,0 +1,22 @@
+.mainContainer {
+    padding: 20px;
+}
+
+.componentHeader {
+    background-color: #e5c4d3;
+}
+
+.resumeHeader {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.noUserData {
+    color: red;
+    font-size: x-large;
+}
+
+.searchControl {
+    width: 300px;
+}
