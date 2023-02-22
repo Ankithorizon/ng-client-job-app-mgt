@@ -41,13 +41,13 @@ export class SearchJobAppComponent implements OnInit {
 		// this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 	}
 
-   ngOnInit(): void {  
+  ngOnInit(): void {
     this.getProvinces();
-   }
+  }
   
-    getProvinces() {
+  getProvinces() {
     this.provinces = this.localDataService.getProvinces();
-    }
+  }
   
   changeProvince(e) {
     console.log(e.target.value);
@@ -63,8 +63,8 @@ export class SearchJobAppComponent implements OnInit {
       this.cities = cities_;
     }
   }
-   changeCity(e) {
-    console.log(e.target.value);  
+  changeCity(e) {
+    console.log(e.target.value);
     this.sCity = e.target.value;
   }
   
@@ -138,10 +138,21 @@ export class SearchJobAppComponent implements OnInit {
       });
     }
 
-    // combine 2 arrays and remove duplicate
-    // province, city, contact-person-name
-    const result = [...new Set([...jobApps_, ...jobApps__])]
-  
+
+    var result = [];
+    if (filterProvince === '' && filterCity === '' && filterContactPersonName!=='') {
+      result = [...jobApps__];
+    }
+    else if (filterProvince === '' && filterCity === '' && filterContactPersonName === '') {
+      result = [...jobApps_];
+    }
+    else {
+      // combine 2 arrays and remove duplicate
+      // province, city, contact-person-name
+      result = [...new Set([...jobApps_, ...jobApps__])];
+    }
+
+    // here result[] = [(province && city) || contact-person-name]
 
     // start-applied-on, end-applied-on
     if (this.fromDate !== undefined && this.toDate !== undefined && this.fromDate !== null && this.toDate
@@ -158,7 +169,17 @@ export class SearchJobAppComponent implements OnInit {
       jobApps_ = [...result];
     }
 
+    // here result[] = [(province && city) || contact-person-name] && [(from-date && end-date)]
+
+    // this will reset date-range after filter
+    this.dateRangeReset();
+
     // return jobApps_ to parent-component   
     this.dataFilterDone.emit(jobApps_);
+  }
+
+  dateRangeReset() {
+    this.fromDate = undefined;
+    this.toDate = undefined;
   }
 }
