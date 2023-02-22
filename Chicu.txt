@@ -1,7 +1,3 @@
-this file belongs to B-chicu branch
-
-edit by B-chicu @ 01:57 PM
-
 
 $ git branch
 $ git checkout master
@@ -12,7 +8,7 @@ $ git push -u origin master
 
 after this you will see Chicu.txt file @ master branch
 
-now create new branch B-chicu and checkout from master and edit Chicu.txt
+now create new branch B-chicu and checkout from master-to-B-chicu and edit Chicu.txt
 and push to B-chicu/master branch
 
 $ git branch B-chicu
