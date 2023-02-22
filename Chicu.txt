@@ -1,3 +1,25 @@
 this file belongs to B-chicu branch
 
 edit by B-chicu @ 01:57 PM
+
+
+$ git branch
+$ git checkout master
+create Chicu.txt file @ master
+$ git add Chicu.txt
+$ git commit -m 'initial-create-of-Chicu.txt-by-master'
+$ git push -u origin master
+
+after this you will see Chicu.txt file @ master branch
+
+now create new branch B-chicu and checkout from master and edit Chicu.txt
+and push to B-chicu/master branch
+
+$ git branch B-chicu
+$ git checkout B-chicu
+$ git checkout origin/master -- Chicu.txt
+now open and edit Chicu.txt file @ B-chicu branch
+git add Chicu.txt
+git commit -m 'edit-chicu.txt-by-B-chicu'
+git push -u origin B-chicu ,,, this will push to B-chicu branch
+
