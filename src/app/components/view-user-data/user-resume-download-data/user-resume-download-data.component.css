@@ -1,13 +1,15 @@
-.mainHeader {
-    text-align: center;
-    color: darkolivegreen;
-    font-size: xx-large;
-    font-weight: bold;
-    margin-top: -40px;
+.mainContainer {
+    padding: 20px;
 }
 
 .componentHeader {
-    background-color: lightyellow;
+    background-color: #e5c4d3;
+}
+
+.resumeHeader {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .noUserData {
@@ -17,4 +19,8 @@
 
 .searchControl {
     width: 300px;
+}
+
+.ip{
+    width:200px;
 }

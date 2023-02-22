@@ -12,14 +12,14 @@ import { LocalDataService } from '../../../services/local-data.service';
 })
 export class UserResumeDownloadDataComponent implements OnInit {
 
-    term: string;
+  term: string;
   
   userData: Array<any>;
   
   page: number = 1;
   count: number = 0;
-  tableSize: number = 3;
-  tableSizes: any = [3, 6, 9, 12];
+  tableSize: number = 20;
+  tableSizes: any = [20, 30, 50];
 
   constructor(
     public localDataService: LocalDataService,
@@ -28,7 +28,7 @@ export class UserResumeDownloadDataComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getUserResumeDownloadData();  
+    this.getUserResumeDownloadData();
   }
 
   onTableDataChange(event: any) {

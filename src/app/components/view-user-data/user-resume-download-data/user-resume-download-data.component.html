@@ -1,68 +1,94 @@
-<div class="container">
-
-    <div class="mainHeader">
-        User-Data By Resume-Downloaded
-    </div>
-    <hr />  
-    <p></p>
-
-
+<div class="container mainContainer">
     <div class="row">
-        <div class="col-md-12 mx-auto">
+        <div class="col-sm-12">
             <div class="card">
+                <div class="card-header componentHeader">
+                    <div class="resumeHeader">
+                        <div>
+                            Resume-Downloaded
+                        </div>                    
+                    </div>
+                </div>
                 <div class="card-body">
-                    <div *ngIf="userData?.length>0; else noUserData" 
-                        class="container">
-
-                        <div class="form-group">
-                            <input type="text" 
-                                class="searchControl form-control" 
-                                placeholder="Search!!!"
-                                [(ngModel)]="term">
-                        </div>
-                        <p></p>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>IP</th>
-                                    <th>Downloaded At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let p of userData  | filter:term | paginate
-                                        : {
-                                            itemsPerPage: tableSize,
-                                            currentPage: page,
-                                            totalItems: count
-                                        };
-                                        let i = index
-                                    ">
-                                    <th scope="row">{{ p.userResumeCreateId }}</th>
-                                    <td>{{ p.firstName }}</td>
-                                    <td>{{ p.lastName }}</td>
-                                    <td>{{ p.userIPAddress }}</td>
-                                    <td>{{ p.resumeCreatedAt }}</td>                                  
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            <pagination-controls previousLabel="Prev" 
-                                nextLabel="Next"
-                                (pageChange)="onTableDataChange($event)">
-                            </pagination-controls>
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <div *ngIf="userData?.length>0; else noUserData" class="container">
+                                <div class="form-group">
+                                    <input type="text" class="searchControl form-control" placeholder="Search!!!" [(ngModel)]="term">
+                                </div>
+                                <p></p>                            
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>IP</th>
+                                            <th>Downloaded At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let p of userData  
+                                                | filter:term 
+                                                | paginate
+                                                                : {
+                                                                    itemsPerPage: tableSize,
+                                                                    currentPage: page,
+                                                                    totalItems: count
+                                                                };
+                                                                let i = index">                                                                                                    
+                                            <td scope="row">{{ p.userResumeCreateId }}</td>
+                                            <td>
+                                                <span *ngIf="p.firstName; else NA">
+                                                    {{ p.firstName }}
+                                                </span>
+                                                <ng-template #NA>
+                                                    N/A
+                                                </ng-template>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="p.lastName; else NA">
+                                                    {{ p.lastName }}
+                                                </span>
+                                                <ng-template #NA>
+                                                    N/A
+                                                </ng-template>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <textarea cols="25" rows="3"
+                                                        disabled="true"
+                                                        class="text-area">
+                                                        {{p.userIPAddress}}
+                                                    </textarea>                                                    
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{ p.resumeCreatedAt | date : "MMM-dd, y" }}
+                                                </span>
+                                                <br />
+                                                <span>
+                                                    {{ p.resumeCreatedAt | date : "hh:mm a" }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center">
+                                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                            <ng-template #noUserData>
+                                <div class="container">
+                                    <span class="noUserDate">
+                                        USer-Data Not Found !
+                                    </span>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
-                    <ng-template #noUserData>
-                        <div class="container">
-                            <span class="noUserDate">
-                                USer-Data Not Found !
-                            </span>
-                        </div>
-                    </ng-template>
                 </div>
             </div>
         </div>

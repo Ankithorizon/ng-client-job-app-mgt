@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'track-job', component: TrackJobAppComponent },
   { path: 'resume-upload', component: JobResumeUploadComponent },
   { path: 'resume-creator', component: ResumeCreatorComponent },
-  { path: 'view-user-data', component: ViewUserDataComponent },
+  { path: 'user-data', component: ViewUserDataComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 

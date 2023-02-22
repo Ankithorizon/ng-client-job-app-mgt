@@ -1,0 +1,69 @@
+.mainContainer {
+    padding: 20px;
+}
+
+.componentHeader {
+    background-color: lightyellow;
+}
+
+.nav-tabs .nav-link.active {
+    border-color: transparent;
+    background-color: #fff !important;
+    color: #9a1550 !important;
+    border-bottom: 4px solid #9a1550 !important
+}
+
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+    width: 100%;
+    color: #000
+}
+
+.nav-tabs .nav-link {
+    border-top-left-radius: 0rem !important;
+    border-top-right-radius: 0rem !important
+}
+
+.nav-tabs .nav-link.active {
+    border-color: transparent;
+    background-color: #60D0FF;
+    color: #fff;
+    font-weight: 600
+}
+
+.nav-link {
+    height: 77px;
+    font-size: 13px;
+    background-color: #fff
+}
+
+.nav-link:hover {
+    border: none
+}
+
+.nav-link:focus {
+    outline: none
+}
+
+.tab-pane {
+    height: 300px
+}
+
+.custom-button {
+    height: 45px;
+    background-color: #9a1550;
+    border: none;
+    color: #fff
+}
+
+.custom-button:hover,
+.custom-button:focus {
+    background-color: #9a1550;
+    box-shadow: none;
+    outline: none
+}
+
+.scroll-y {
+    overflow-y: scroll;
+    height: 300px
+}
