@@ -9,6 +9,7 @@ import { AddJobAppComponent } from './components/follow-up/add-job-app/add-job-a
 import { JobResumeUploadComponent } from './components/job-resume-upload/job-resume-upload.component';
 import { TrackJobAppComponent } from './components/follow-up/track-job-app/track-job-app.component';
 import { ResumeCreatorComponent } from './components/resume-creator/resume-creator.component';
+import { ViewUserDataComponent } from './components/view-user-data/view-user-data.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'track-job', component: TrackJobAppComponent },
   { path: 'resume-upload', component: JobResumeUploadComponent },
   { path: 'resume-creator', component: ResumeCreatorComponent },
+  { path: 'view-user-data', component: ViewUserDataComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 

@@ -1,0 +1,20 @@
+.mainHeader {
+    text-align: center;
+    color: darkolivegreen;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-top: -40px;
+}
+
+.componentHeader {
+    background-color: lightyellow;
+}
+
+.noUserData {
+    color: red;
+    font-size: x-large;
+}
+
+.searchControl {
+    width: 300px;
+}

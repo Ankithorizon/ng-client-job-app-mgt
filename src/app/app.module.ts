@@ -32,6 +32,9 @@ import { CreateSkillsComponent } from './components/resume-creator/create-skills
 import { CreateExperienceComponent } from './components/resume-creator/create-experience/create-experience.component';
 import { CreateEducationComponent } from './components/resume-creator/create-education/create-education.component';
 import { ViewMyResumeComponent } from './components/resume-creator/view-my-resume/view-my-resume.component';
+import { ViewUserDataComponent } from './components/view-user-data/view-user-data.component';
+import { UserResumeDownloadDataComponent } from './components/view-user-data/user-resume-download-data/user-resume-download-data.component';
+import { UserResumeEmailDataComponent } from './components/view-user-data/user-resume-email-data/user-resume-email-data.component';
 
 
 // services
@@ -54,6 +57,9 @@ import { ViewMyResumeComponent } from './components/resume-creator/view-my-resum
     CreateExperienceComponent,
     CreateEducationComponent,
     ViewMyResumeComponent,
+    ViewUserDataComponent,
+    UserResumeDownloadDataComponent,
+    UserResumeEmailDataComponent,
   ],
   imports: [
     BrowserModule,

@@ -77,4 +77,15 @@ export class DataService {
     return this.http.post<string>(this.ResumeCreator_API + '/createAndEmailResume', myResume,
       { responseType: 'string' as 'json' });
   }
+
+  // view-user-resume-download-data
+  // get all userResumeCreate
+  getUserResumeDownloadData(): Observable<Array<any>> {
+    return this.http.get<Array<any>>(this.ResumeCreator_API + '/getUserResumeDownloadData');
+  }
+  // view-user-resume-email-data
+  // get all userResumeEmail
+  getUserResumeEmailData(): Observable<Array<any>> {
+    return this.http.get<Array<any>>(this.ResumeCreator_API + '/getUserResumeEmailData');
+  }
 }
